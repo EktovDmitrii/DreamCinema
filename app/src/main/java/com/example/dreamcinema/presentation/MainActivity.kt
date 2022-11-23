@@ -1,7 +1,8 @@
-package com.example.dreamcinema
+package com.example.dreamcinema.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.dreamcinema.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
