@@ -1,4 +1,4 @@
-package com.example.dreamcinema.data
+package com.example.dreamcinema.data.network
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,11 +16,11 @@ data class MovieInfoDto(
 
     @SerializedName("backdrop_path")
     @Expose
-    val backdrop_path: String,
+    val backdropPath: String,
 
     @SerializedName("genre_ids")
     @Expose
-    val genre_ids: List<Int>,
+    val genreIds: List<Int>,
 
     @SerializedName("id")
     @Expose
@@ -28,11 +28,11 @@ data class MovieInfoDto(
 
     @SerializedName("original_language")
     @Expose
-    val original_language: String,
+    val originalLanguage: String,
 
     @SerializedName("original_title")
     @Expose
-    val original_title: String,
+    val originalTitle: String,
 
     @SerializedName("overview")
     @Expose
@@ -44,11 +44,11 @@ data class MovieInfoDto(
 
     @SerializedName("poster_path")
     @Expose
-    val poster_path: String,
+    val posterPath: String,
 
     @SerializedName("release_date")
     @Expose
-    val release_date: String,
+    val releaseDate: String,
 
     @PrimaryKey
     @SerializedName("title")
@@ -61,10 +61,10 @@ data class MovieInfoDto(
 
     @SerializedName("vote_average")
     @Expose
-    val vote_average: Double,
+    val voteAverage: Double,
 
     @SerializedName("vote_count")
     @Expose
-    val vote_count: Int
+    val voteCount: Int
 
 )

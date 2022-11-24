@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.dreamcinema.R
-import com.example.dreamcinema.data.ApiFactory
-import com.example.dreamcinema.data.ApiFactory.apiService
+import com.example.dreamcinema.data.network.api.ApiFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
