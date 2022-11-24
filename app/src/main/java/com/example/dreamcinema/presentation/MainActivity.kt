@@ -1,14 +1,11 @@
 package com.example.dreamcinema.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.dreamcinema.R
-import com.example.dreamcinema.data.network.api.ApiFactory
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.dreamcinema.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.dreamcinema.presentation.adapter.MovieInfoAdapter
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,15 +13,28 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private lateinit var viewModel: MovieInfoViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as MovieApp).component
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val adapter = MovieInfoAdapter(this)
+        binding.rvFilmInfoList.adapter = adapter
 
+        viewModel = ViewModelProvider(this, viewModelFactory)[MovieInfoViewModel::class.java]
+        viewModel.movieInfoList.observe(this) {
+            adapter.submitList(it)
+        }
     }
 
 
-   private suspend fun loadData(){
-        val topMovies = ApiFactory.apiService.getTopMoviesInfo()
-        Log.d("tagtag", "${topMovies.toString()}")
-    }
 }
