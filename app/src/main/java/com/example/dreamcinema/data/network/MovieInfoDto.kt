@@ -18,9 +18,9 @@ data class MovieInfoDto(
     @Expose
     val backdropPath: String,
 
-    @SerializedName("genre_ids")
+    @SerializedName("genreIds")
     @Expose
-    val genreIds: List<Int>,
+    val genreIds: String,
 
     @SerializedName("id")
     @Expose

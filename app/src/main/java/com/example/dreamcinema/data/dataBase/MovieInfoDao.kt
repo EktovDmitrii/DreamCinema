@@ -1,4 +1,4 @@
-package com.example.dreamcinema.data
+package com.example.dreamcinema.data.dataBase
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

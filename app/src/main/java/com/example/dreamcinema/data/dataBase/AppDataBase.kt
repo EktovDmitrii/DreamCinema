@@ -1,4 +1,4 @@
-package com.example.dreamcinema.data
+package com.example.dreamcinema.data.dataBase
 
 import android.content.Context
 import androidx.room.Database

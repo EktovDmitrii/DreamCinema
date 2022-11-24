@@ -1,5 +1,6 @@
 package com.example.dreamcinema.data.network.api
 
+import com.example.dreamcinema.data.network.MovieInfoDto
 import com.example.dreamcinema.data.network.MovieInfoListDto
 import retrofit2.http.GET
 import retrofit2.http.Query
