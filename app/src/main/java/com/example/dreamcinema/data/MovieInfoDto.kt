@@ -1,12 +1,14 @@
 package com.example.dreamcinema.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
 @Entity(tableName = "movie_overview")
 data class MovieInfoDto(
+
 
     @SerializedName("adult")
     @Expose
@@ -48,6 +50,7 @@ data class MovieInfoDto(
     @Expose
     val release_date: String,
 
+    @PrimaryKey
     @SerializedName("title")
     @Expose
     val title: String,
