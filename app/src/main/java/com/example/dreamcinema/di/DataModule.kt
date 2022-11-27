@@ -1,8 +1,6 @@
 package com.example.dreamcinema.di
 
 import android.app.Application
-import com.example.dreamcinema.data.dataBase.AppDataBase
-import com.example.dreamcinema.data.dataBase.MovieInfoDao
 import com.example.dreamcinema.data.dataBase.MovieRepositoryImpl
 import com.example.dreamcinema.data.network.api.ApiFactory
 import com.example.dreamcinema.data.network.api.ApiService
@@ -20,11 +18,7 @@ interface DataModule {
     fun bindMovieRepository(impl: MovieRepositoryImpl): MovieRepository
 
     companion object {
-        @Provides
-        @ApplicationScope
-        fun provideMovieInfoDao(application: Application): MovieInfoDao {
-            return AppDataBase.getInstance(application).movieInfoDao()
-        }
+
 
         @Provides
         @ApplicationScope
