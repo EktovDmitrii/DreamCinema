@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 class MovieInfoViewModel @Inject constructor(
     private val getMovieInfoListUseCase: GetMovieInfoListUseCase,
-//    private val apiService: ApiService,
     private val getMovieDetailInfoUseCase: GetMovieDetailInfoUseCase
 ) : ViewModel() {
 

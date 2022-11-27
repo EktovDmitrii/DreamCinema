@@ -7,7 +7,6 @@ import com.example.dreamcinema.domain.MovieRepository
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val dataSource: RemoteDataSource,
     private val apiService: ApiService
 ) : MovieRepository {
 
@@ -22,7 +21,6 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
     }
-
 
 
     override fun getMovieDetailInfo(title: String): MovieInfo {
