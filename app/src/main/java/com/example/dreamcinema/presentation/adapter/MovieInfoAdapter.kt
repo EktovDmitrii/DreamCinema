@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MovieInfoAdapter @Inject constructor(
 ) : RecyclerView.Adapter<MovieInfoViewHolder>() {
 
-    var myData: List<MovieInfoDto> = emptyList()
+    var myData: List<MovieInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_info, parent, false)

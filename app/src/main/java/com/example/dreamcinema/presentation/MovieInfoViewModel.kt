@@ -13,17 +13,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieInfoViewModel @Inject constructor(
-//    private val getMovieInfoListUseCase: GetMovieInfoListUseCase,
-    private val apiService: ApiService,
+    private val getMovieInfoListUseCase: GetMovieInfoListUseCase,
+//    private val apiService: ApiService,
     private val getMovieDetailInfoUseCase: GetMovieDetailInfoUseCase
 ) : ViewModel() {
 
-    private val _listMovie = MutableLiveData<List<MovieInfoDto>>()
-    val listMovie: LiveData<List<MovieInfoDto>> = _listMovie
+    private val _listMovie = MutableLiveData<List<MovieInfo>>()
+    val listMovie: LiveData<List<MovieInfo>> = _listMovie
 
     fun getTopMovieList() {
         viewModelScope.launch {
-            val movie = apiService.getTopMoviesInfo().movieList
+            val movie = getMovieInfoListUseCase()
             _listMovie.value = movie
         }
     }

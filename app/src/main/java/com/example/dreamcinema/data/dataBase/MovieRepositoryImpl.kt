@@ -1,16 +1,18 @@
 package com.example.dreamcinema.data.dataBase
 
+import com.example.dreamcinema.data.network.api.ApiService
 import com.example.dreamcinema.data.network.api.RemoteDataSource
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.MovieRepository
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val dataSource: RemoteDataSource
+    private val dataSource: RemoteDataSource,
+    private val apiService: ApiService
 ) : MovieRepository {
 
     override suspend fun getMovieInfoList(): List<MovieInfo> {
-        return dataSource.getTopRatedMovies().movieList.map { it ->
+        return apiService.getTopMoviesInfo().movieList.map { it ->
             MovieInfo(
                 id = it.id,
                 posterPath = it.posterPath,
@@ -20,6 +22,7 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
     }
+
 
 
     override fun getMovieDetailInfo(title: String): MovieInfo {

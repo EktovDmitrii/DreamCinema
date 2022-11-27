@@ -11,10 +11,10 @@ import javax.inject.Inject
 class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val binding: MovieInfoBinding = MovieInfoBinding.bind(itemView)
-    fun bind(movieInfoDto: MovieInfoDto) {
-        binding.tvFilmName.text = movieInfoDto.title
-        binding.tvFilmRate.text = movieInfoDto.voteAverage.toString()
-        Picasso.get().load("https://image.tmdb.org/t/p/original/${movieInfoDto.posterPath}")
+    fun bind(movieInfo: MovieInfo) {
+        binding.tvFilmName.text = movieInfo.title
+        binding.tvFilmRate.text = movieInfo.voteAverage.toString()
+        Picasso.get().load("https://image.tmdb.org/t/p/original/${movieInfo.posterPath}")
             .into(binding.ivFilmLogo)
     }
 }
