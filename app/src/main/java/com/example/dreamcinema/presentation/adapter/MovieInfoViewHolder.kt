@@ -14,5 +14,7 @@ class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(movieInfoDto: MovieInfoDto) {
         binding.tvFilmName.text = movieInfoDto.title
         binding.tvFilmRate.text = movieInfoDto.voteAverage.toString()
+        Picasso.get().load("https://image.tmdb.org/t/p/original/${movieInfoDto.posterPath}")
+            .into(binding.ivFilmLogo)
     }
 }
