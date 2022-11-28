@@ -12,6 +12,31 @@ interface ApiService {
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieInfoListDto
 
+    @GET("3/movie/popular")
+    suspend fun getPopularMoviesInfo(
+        @Query(QUERY_PARAM_API_KEY) api_key: String = "139c985f543aaf9db3e818b31275a4c1",
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
+
+    @GET("3/movie/now_playing")
+    suspend fun getNowPlayingMovieInfo(
+        @Query(QUERY_PARAM_API_KEY) api_key: String = "139c985f543aaf9db3e818b31275a4c1",
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
+
+    @GET("3/movie/upcoming")
+    suspend fun getUpcomingMovieInfo(
+        @Query(QUERY_PARAM_API_KEY) api_key: String = "139c985f543aaf9db3e818b31275a4c1",
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
+
+    @GET("3/movie/latest")
+    suspend fun getLatestMovieInfo(
+        @Query(QUERY_PARAM_API_KEY) api_key: String = "139c985f543aaf9db3e818b31275a4c1",
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
+
+
     companion object {
 
         private const val QUERY_PARAM_API_KEY = "api_key"

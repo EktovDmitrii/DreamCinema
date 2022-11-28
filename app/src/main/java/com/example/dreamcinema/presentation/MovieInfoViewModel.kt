@@ -4,16 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dreamcinema.data.network.MovieInfoDto
-import com.example.dreamcinema.data.network.api.ApiService
-import com.example.dreamcinema.domain.GetMovieDetailInfoUseCase
-import com.example.dreamcinema.domain.GetMovieInfoListUseCase
+import com.example.dreamcinema.domain.useCases.GetMovieDetailInfoUseCase
+import com.example.dreamcinema.domain.GetTopMovieInfoListUseCase
 import com.example.dreamcinema.domain.MovieInfo
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieInfoViewModel @Inject constructor(
-    private val getMovieInfoListUseCase: GetMovieInfoListUseCase,
+    private val getTopMovieInfoListUseCase: GetTopMovieInfoListUseCase,
     private val getMovieDetailInfoUseCase: GetMovieDetailInfoUseCase
 ) : ViewModel() {
 
@@ -22,7 +20,7 @@ class MovieInfoViewModel @Inject constructor(
 
     fun getTopMovieList() {
         viewModelScope.launch {
-            val movie = getMovieInfoListUseCase()
+            val movie = getTopMovieInfoListUseCase()
             _listMovie.value = movie
         }
     }

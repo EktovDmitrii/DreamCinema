@@ -1,7 +1,6 @@
-package com.example.dreamcinema.data.dataBase
+package com.example.dreamcinema.data.RepositoryImpl
 
 import com.example.dreamcinema.data.network.api.ApiService
-import com.example.dreamcinema.data.network.api.RemoteDataSource
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.MovieRepository
 import javax.inject.Inject
@@ -10,7 +9,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : MovieRepository {
 
-    override suspend fun getMovieInfoList(): List<MovieInfo> {
+    override suspend fun getTopMovieInfoList(): List<MovieInfo> {
         return apiService.getTopMoviesInfo().movieList.map { it ->
             MovieInfo(
                 id = it.id,

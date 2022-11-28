@@ -5,7 +5,16 @@ import com.example.dreamcinema.data.network.MovieInfoDto
 
 interface MovieRepository {
 
-   suspend  fun getMovieInfoList():  List<MovieInfo>
+    suspend fun getTopMovieInfoList(): List<MovieInfo>
+
+    suspend fun getPopularMovieInfoList(): List<MovieInfo>
+
+    suspend fun getNowPlayingMovieInfoList(): List<MovieInfo>
+
+    suspend fun getUpcomingMovieInfoList(): List<MovieInfo>
+
+    suspend fun getLatestMovieInfoList(): List<MovieInfo>
+
 
     fun getMovieDetailInfo(title: String): MovieInfo
 }
