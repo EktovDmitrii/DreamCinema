@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
     private fun setObservers() {
         viewModel.listMovie.observe(viewLifecycleOwner) { listMovie ->
             adapterVertical.myData = listMovie
-            adapterVertical.notifyDataSetChanged()
+            adapterVertical.submitList(listMovie)
         }
     }
 

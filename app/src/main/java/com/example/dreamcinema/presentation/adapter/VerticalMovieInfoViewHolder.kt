@@ -16,7 +16,6 @@ class VerticalMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         binding.rvFilmInfo.adapter = adapter
         binding.tvFilmGroup.text = movieList.listTitle
         adapter.myData = movieList.movieList
-        adapter.notifyDataSetChanged()
     }
 
 }

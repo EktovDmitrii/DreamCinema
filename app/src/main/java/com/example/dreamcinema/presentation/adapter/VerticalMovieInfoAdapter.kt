@@ -2,13 +2,13 @@ package com.example.dreamcinema.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieList
 import javax.inject.Inject
 
 class VerticalMovieInfoAdapter @Inject constructor(
-) : RecyclerView.Adapter<VerticalMovieInfoViewHolder>() {
+) : ListAdapter<MovieList, VerticalMovieInfoViewHolder>(MovieListDiffCallback) {
 
     var myData: List<MovieList> = emptyList()
 
