@@ -1,9 +1,7 @@
 package com.example.dreamcinema.di
 
 import android.app.Application
-import com.example.dreamcinema.presentation.HomeFragment
-import com.example.dreamcinema.presentation.MainActivity
-import com.example.dreamcinema.presentation.MovieApp
+import com.example.dreamcinema.presentation.*
 import dagger.BindsInstance
 import dagger.Component
 
@@ -16,6 +14,10 @@ interface ApplicationComponent {
     fun inject(application: MovieApp)
 
     fun inject(fragment: HomeFragment)
+
+    fun inject(fragment: FavouriteFragment)
+
+    fun inject(fragment: GenreFragment)
 
 
     @Component.Factory

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.dreamcinema.databinding.FragmentHomeBinding
-import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoAdapter
 import com.example.dreamcinema.presentation.adapter.VerticalMovieInfoAdapter
 import javax.inject.Inject
 
