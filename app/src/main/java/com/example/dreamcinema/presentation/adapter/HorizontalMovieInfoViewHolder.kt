@@ -8,7 +8,7 @@ import com.example.dreamcinema.domain.MovieInfo
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class MovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class HorizontalMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val binding: MovieInfoBinding = MovieInfoBinding.bind(itemView)
     fun bind(movieInfo: MovieInfo) {

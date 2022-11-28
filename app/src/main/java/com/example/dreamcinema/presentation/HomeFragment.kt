@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.dreamcinema.databinding.FragmentHomeBinding
-import com.example.dreamcinema.presentation.adapter.MovieInfoAdapter
+import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoAdapter
+import com.example.dreamcinema.presentation.adapter.VerticalMovieInfoAdapter
 import javax.inject.Inject
 
 
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: MovieInfoViewModel
 
-    private lateinit var adapter: MovieInfoAdapter
+    private lateinit var adapterVertical: VerticalMovieInfoAdapter
 
 
     override fun onAttach(context: Context) {
@@ -35,10 +36,6 @@ class HomeFragment : Fragment() {
         component.inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +48,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieInfoViewModel::class.java]
-        adapter = MovieInfoAdapter()
-        binding.rvFilmInfoList.adapter = adapter
+        adapterVertical = VerticalMovieInfoAdapter()
+        binding.rvFilmInfoList.adapter = adapterVertical
         setObservers()
-        viewModel.getTopMovieList()
+        viewModel.getAllMovieList()
     }
 
     override fun onDestroyView() {
@@ -64,9 +61,9 @@ class HomeFragment : Fragment() {
 
 
     private fun setObservers() {
-        viewModel.listMovie.observe(viewLifecycleOwner) { movieInfo ->
-            adapter.myData = movieInfo
-            adapter.notifyDataSetChanged()
+        viewModel.listMovie.observe(viewLifecycleOwner) { listMovie ->
+            adapterVertical.myData = listMovie
+            adapterVertical.notifyDataSetChanged()
         }
     }
 

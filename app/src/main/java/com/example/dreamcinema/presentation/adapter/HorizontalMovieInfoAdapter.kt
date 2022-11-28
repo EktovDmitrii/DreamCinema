@@ -4,24 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
-import com.example.dreamcinema.data.network.MovieInfoDto
-import com.example.dreamcinema.databinding.MovieInfoBinding
 import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
-class MovieInfoAdapter @Inject constructor(
-) : RecyclerView.Adapter<MovieInfoViewHolder>() {
+class HorizontalMovieInfoAdapter @Inject constructor(
+) : RecyclerView.Adapter<HorizontalMovieInfoViewHolder>() {
 
     var myData: List<MovieInfo> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieInfoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalMovieInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_info, parent, false)
-        return MovieInfoViewHolder(view)
+        return HorizontalMovieInfoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieInfoViewHolder, position: Int) {
+    override fun onBindViewHolder(holderHorizontal: HorizontalMovieInfoViewHolder, position: Int) {
         val movie = myData[position]
-        holder.bind(movie)
+        holderHorizontal.bind(movie)
     }
 
     override fun getItemCount(): Int {
