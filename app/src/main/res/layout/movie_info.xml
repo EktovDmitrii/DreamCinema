@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/indigo"
+    app:cardBackgroundColor="@color/DarkSlateGray"
     app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
 
@@ -14,34 +14,38 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/iv_film_logo_container"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/indigo"
+            app:cardBackgroundColor="@color/DarkSlateGray"
             app:layout_constraintBottom_toTopOf="@id/tv_film_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_film_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 tools:src="@mipmap/ic_launcher" />
 
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_film_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:singleLine="false"
+            android:maxLines="3"
+            android:maxWidth="200dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_film_logo_container"
             tools:text="film"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -53,19 +57,21 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_middle"
             android:text="@string/film_rating"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_film_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             tools:text="8,5"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/guideline_middle"
+            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
             app:layout_constraintTop_toBottomOf="@id/tv_film_name" />
         
         <androidx.constraintlayout.widget.Guideline

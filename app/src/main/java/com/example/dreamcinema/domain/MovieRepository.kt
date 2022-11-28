@@ -13,8 +13,6 @@ interface MovieRepository {
 
     suspend fun getUpcomingMovieInfoList(): List<MovieInfo>
 
-    suspend fun getLatestMovieInfoList(): List<MovieInfo>
-
     suspend fun getAllMovieListsInfo(): List<MovieList>
 
     fun getMovieDetailInfo(title: String): MovieInfo
