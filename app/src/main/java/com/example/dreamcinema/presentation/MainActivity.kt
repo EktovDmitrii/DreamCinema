@@ -1,17 +1,9 @@
 package com.example.dreamcinema.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.dreamcinema.data.network.api.ApiFactory
-import com.example.dreamcinema.data.network.api.ApiService
-import com.example.dreamcinema.data.network.api.RemoteDataSource
+import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.ActivityMainBinding
-import com.example.dreamcinema.presentation.adapter.MovieInfoAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -20,13 +12,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewModel: MovieInfoViewModel
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
-    private lateinit var adapter: MovieInfoAdapter
-
 
     private val component by lazy {
         (application as MovieApp).component
@@ -36,18 +23,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         component.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory)[MovieInfoViewModel::class.java]
-
-        adapter = MovieInfoAdapter()
-        binding.rvFilmInfoList.adapter = adapter
-        setObservers()
-        viewModel.getTopMovieList()
+        launchHomeFragment()
     }
 
-    private fun setObservers() {
-        viewModel.listMovie.observe(this) { movieInfo ->
-            adapter.myData = movieInfo
-            adapter.notifyDataSetChanged()
-        }
+    private fun launchHomeFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, HomeFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
     }
 }
