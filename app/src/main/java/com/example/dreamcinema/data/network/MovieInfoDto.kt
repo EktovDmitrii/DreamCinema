@@ -8,7 +8,11 @@ data class MovieInfoDto(
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("release_date") val releaseDate: String,
     @SerializedName("title") val title: String,
-    @SerializedName("vote_average") val voteAverage: Double
-
+    @SerializedName("vote_average") val voteAverage: Double,
+    @SerializedName("video") val video : Boolean,
+    @SerializedName("overview") val overview : String,
+    @SerializedName("popularity") val popularity : Double,
+    @SerializedName("backdrop_path") val backdropPath : String?,
+    @SerializedName("genre_ids") val genreIds : List<Int>,
 
 )

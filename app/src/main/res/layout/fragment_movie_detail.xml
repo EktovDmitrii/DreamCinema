@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.MovieDetailFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/background_container"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_background_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_background_movie"
+            android:scaleType="centerCrop"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/poster_container"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="10dp"
+        app:cardCornerRadius="12dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_movie_detail_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_background_movie"
+            android:scaleType="centerCrop" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_title_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@id/poster_container"
+        app:layout_constraintBottom_toTopOf="@id/cv_date_container"
+        >
+
+        <TextView
+            android:id="@+id/tv_movie_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Avatar"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_date_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@id/poster_container"
+        app:layout_constraintBottom_toTopOf="@id/cv_rate_container"
+        >
+
+        <TextView
+            android:id="@+id/tv_movie_detail_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2020"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_rate_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@id/poster_container"
+        app:layout_constraintBottom_toBottomOf="@id/background_container"
+        >
+
+        <TextView
+            android:id="@+id/tv_movie_detail_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="8,52342424242234522345"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_watch_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/watch_trailer"
+        app:layout_constraintTop_toBottomOf="@id/background_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/tv_movie_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="info about movie"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_watch_movie" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

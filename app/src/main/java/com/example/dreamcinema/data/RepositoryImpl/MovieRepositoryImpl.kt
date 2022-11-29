@@ -1,5 +1,7 @@
 package com.example.dreamcinema.data.RepositoryImpl
 
+import com.example.dreamcinema.data.network.MovieInfoDto
+import com.example.dreamcinema.data.network.MovieInfoListDto
 import com.example.dreamcinema.data.network.api.ApiService
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.MovieList
@@ -10,6 +12,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : MovieRepository {
 
+
     override suspend fun getTopMovieInfoList(): List<MovieInfo> {
         return apiService.getTopMoviesInfo().movieList.map { it ->
             MovieInfo(
@@ -17,7 +20,12 @@ class MovieRepositoryImpl @Inject constructor(
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
                 title = it.title,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
             )
         }
     }
@@ -29,7 +37,12 @@ class MovieRepositoryImpl @Inject constructor(
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
                 title = it.title,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
             )
         }
     }
@@ -41,7 +54,12 @@ class MovieRepositoryImpl @Inject constructor(
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
                 title = it.title,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
             )
         }
     }
@@ -53,7 +71,12 @@ class MovieRepositoryImpl @Inject constructor(
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
                 title = it.title,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
             )
         }
     }

@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+        binding.bottomNavigationView.setBackgroundColor(
+            resources.getColor(android.R.color.transparent)
+        )
     }
 
 
