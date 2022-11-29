@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.domain.useCases.GetAllMovieInfoUseCase
+import com.example.dreamcinema.domain.useCases.GetDetailInfoUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -13,15 +13,15 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieDetailViewModel @Inject constructor(
-    private val getAllMovieInfoUseCase: GetAllMovieInfoUseCase
+    private val getDetailInfoUseCase: GetDetailInfoUseCase
 ): ViewModel() {
 
     private val _movie = MutableLiveData<MovieInfo>()
     val movie: LiveData<MovieInfo> = _movie
 
-    fun getAllMovieList() {
+    fun getDetailsInfo(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val movieDetail = getAllMovieInfoUseCase()
+            val movieDetail = getDetailInfoUseCase(id)
             withContext((Dispatchers.Main)) {
                 _movie.value = movieDetail
             }
@@ -32,5 +32,7 @@ class MovieDetailViewModel @Inject constructor(
         super.onCleared()
         viewModelScope.cancel()
     }
+
+
 
 }

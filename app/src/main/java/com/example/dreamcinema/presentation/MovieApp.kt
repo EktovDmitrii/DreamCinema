@@ -11,7 +11,7 @@ class MovieApp : Application() {
     }
 
     override fun onCreate() {
-component.inject(this)
+        component.inject(this)
         super.onCreate()
     }
 }

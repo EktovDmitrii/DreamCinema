@@ -90,7 +90,20 @@ class MovieRepositoryImpl @Inject constructor(
         return listOf(getNowPlaying, getPopular, getTop, getUpcoming)
     }
 
-    override fun getMovieDetailInfo(title: String): MovieInfo {
-        TODO("Not yet implemented")
+    override suspend fun getDetails(movieId: Int): MovieInfo {
+        with(apiService.getDetails(movieId)) {
+            return MovieInfo(
+                id = id,
+                posterPath = posterPath,
+                releaseDate = releaseDate,
+                title = title,
+                voteAverage = voteAverage,
+                video = video,
+                overview = overview,
+                popularity = popularity,
+                backdropPath = backdropPath,
+                genreIds = genreIds
+            )
+        }
     }
 }

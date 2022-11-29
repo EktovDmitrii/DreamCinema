@@ -13,6 +13,6 @@ data class MovieInfoDto(
     @SerializedName("overview") val overview : String,
     @SerializedName("popularity") val popularity : Double,
     @SerializedName("backdrop_path") val backdropPath : String?,
-    @SerializedName("genre_ids") val genreIds : List<Int>,
+    @SerializedName("genre_ids") val genreIds : List<Int>?,
 
 )

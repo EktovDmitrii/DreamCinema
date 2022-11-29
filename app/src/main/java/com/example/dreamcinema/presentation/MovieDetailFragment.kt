@@ -1,13 +1,17 @@
 package com.example.dreamcinema.presentation
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
+import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoViewHolder
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -24,6 +28,10 @@ class MovieDetailFragment : Fragment() {
 
     private lateinit var viewModel: MovieDetailViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    component.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +41,42 @@ class MovieDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val movieId = getMovieId()
+        viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
+        viewModel.getDetailsInfo(movieId)
+        setObservers()
+    }
+
+    private fun getMovieId(): Int {
+        return requireArguments().getInt(MOVIE_ID, NO_MOVIE_ID)
+    }
+
+    private fun setObservers() {
+        viewModel.movie.observe(viewLifecycleOwner) { movie ->
+            binding.tvMovieOverview.text = movie.overview
+            binding.tvMovieDetailRate.text = movie.voteAverage.toString()
+            binding.tvMovieDetailReleaseDate.text = movie.releaseDate
+            binding.tvMovieDetailTitle.text = movie.title
+            Picasso.get().load(BASE_URL + movie.posterPath)
+                .into(binding.ivMovieDetailPoster)
+            Picasso.get().load(BASE_POSTER_URL + movie.backdropPath)
+                .into(binding.ivBackgroundPoster)
+        }
+    }
+
     companion object {
+        private const val BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500"
+        private const val BASE_URL = "https://image.tmdb.org/t/p/original/"
+        private const val MOVIE_ID = "movie_id"
+        private const val NO_MOVIE_ID: Int = -1
 
-        private const val MOVIE_TITLE = "title"
 
-        fun newInstance(title: String): Fragment {
+        fun newInstance(movieId: Int): Fragment {
             return MovieDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(MOVIE_TITLE, title)
+                    putInt(MOVIE_ID, movieId)
                 }
             }
         }

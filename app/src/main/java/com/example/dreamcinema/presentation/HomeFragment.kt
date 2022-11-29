@@ -54,8 +54,8 @@ class HomeFragment : Fragment() {
         adapterVertical =
             VerticalMovieInfoAdapter(object : HorizontalMovieInfoAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieInfo: MovieInfo) {
-                    launchDetailFragment(movieInfo.title)
-                    Log.d("clickChecker", "click sucsessed ${movieInfo.title}")
+                    launchDetailFragment(movieInfo.id)
+                    Log.d("clickChecker", "click sucsessed ${movieInfo.id} ${movieInfo.title}")
                 }
             })
         binding.rvFilmInfoList.adapter = adapterVertical
@@ -76,10 +76,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun launchDetailFragment(title: String) {
+    private fun launchDetailFragment(movieId: Int) {
         childFragmentManager.popBackStack()
         childFragmentManager.beginTransaction()
-            .replace(R.id.detail_fragment_container, MovieDetailFragment.newInstance(title))
+            .replace(R.id.detail_fragment_container, MovieDetailFragment.newInstance(movieId))
             .addToBackStack(null)
             .commit()
     }

@@ -14,5 +14,5 @@ data class MovieInfo @Inject constructor(
     val overview : String,
     val popularity : Double,
     val backdropPath : String?,
-    val genreIds : List<Int>,
+    val genreIds : List<Int>?,
 )
