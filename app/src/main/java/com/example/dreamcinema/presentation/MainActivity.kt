@@ -25,17 +25,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         component.inject(this)
-        launchHomeFragment()
 
 
+        val homeFragment = HomeFragment()
+        val genreFragment = GenreFragment()
+        val favouriteFragment = FavouriteFragment()
+        launchHomeFragment(homeFragment)
 
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.home -> {
+                    launchHomeFragment(homeFragment)
+                    true
+                }
+                R.id.favourite -> {
+                    launchHomeFragment(favouriteFragment)
+                    true
+                }
+                R.id.genre -> {
+                    launchHomeFragment(genreFragment)
+                    true
+                }
+                else ->
+                    throw RuntimeException("")
+
+            }
+        }
     }
 
 
-    private fun launchHomeFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.home_fragment_container, HomeFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
+    private fun launchHomeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.home_fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+            true
+        }
     }
 }

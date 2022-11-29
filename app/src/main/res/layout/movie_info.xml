@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_middle"
             android:text="@string/film_rating"
             android:textColor="@color/white"
-            android:textSize="20sp"
+        android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
