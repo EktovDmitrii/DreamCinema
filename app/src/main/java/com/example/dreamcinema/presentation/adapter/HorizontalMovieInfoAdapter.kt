@@ -7,7 +7,7 @@ import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
-class HorizontalMovieInfoAdapter @Inject constructor(
+class HorizontalMovieInfoAdapter @Inject constructor(val listener: OnMovieClickListener
 ) : RecyclerView.Adapter<HorizontalMovieInfoViewHolder>() {
 
     var myData: List<MovieInfo> = emptyList()
@@ -20,9 +20,17 @@ class HorizontalMovieInfoAdapter @Inject constructor(
     override fun onBindViewHolder(holderHorizontal: HorizontalMovieInfoViewHolder, position: Int) {
         val movie = myData[position]
         holderHorizontal.bind(movie)
+        holderHorizontal.itemView.setOnClickListener {
+            listener.onMovieClick(movie)
+        }
     }
 
     override fun getItemCount(): Int {
         return myData.size
     }
+
+    interface OnMovieClickListener {
+        fun onMovieClick(movieInfo: MovieInfo)
+    }
+
 }

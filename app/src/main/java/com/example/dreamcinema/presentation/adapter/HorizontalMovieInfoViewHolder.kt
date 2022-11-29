@@ -10,13 +10,16 @@ import javax.inject.Inject
 
 class HorizontalMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+
     val binding: MovieInfoBinding = MovieInfoBinding.bind(itemView)
     fun bind(movieInfo: MovieInfo) {
         binding.tvFilmName.text = movieInfo.title
         binding.tvFilmRate.text = movieInfo.voteAverage.toString()
         Picasso.get().load(BASE_URL + movieInfo.posterPath)
             .into(binding.ivFilmLogo)
+
     }
+
 
     companion object {
         private const val BASE_URL = "https://image.tmdb.org/t/p/original/"

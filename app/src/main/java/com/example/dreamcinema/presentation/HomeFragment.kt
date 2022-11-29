@@ -2,12 +2,16 @@ package com.example.dreamcinema.presentation
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentHomeBinding
+import com.example.dreamcinema.domain.MovieInfo
+import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoAdapter
 import com.example.dreamcinema.presentation.adapter.VerticalMovieInfoAdapter
 import javax.inject.Inject
 
@@ -25,7 +29,7 @@ class HomeFragment : Fragment() {
         (requireActivity().application as MovieApp).component
     }
 
-    private lateinit var viewModel: MovieInfoViewModel
+    private lateinit var viewModel: HomeViewModel
 
     private lateinit var adapterVertical: VerticalMovieInfoAdapter
 
@@ -46,8 +50,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[MovieInfoViewModel::class.java]
-        adapterVertical = VerticalMovieInfoAdapter()
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+        adapterVertical =
+            VerticalMovieInfoAdapter(object : HorizontalMovieInfoAdapter.OnMovieClickListener {
+                override fun onMovieClick(movieInfo: MovieInfo) {
+                    launchDetailFragment(movieInfo.title)
+                    Log.d("clickChecker", "click sucsessed ${movieInfo.title}")
+                }
+            })
         binding.rvFilmInfoList.adapter = adapterVertical
         setObservers()
         viewModel.getAllMovieList()
@@ -64,6 +74,14 @@ class HomeFragment : Fragment() {
             adapterVertical.myData = listMovie
             adapterVertical.submitList(listMovie)
         }
+    }
+
+    private fun launchDetailFragment(title: String) {
+        childFragmentManager.popBackStack()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.detail_fragment_container, MovieDetailFragment.newInstance(title))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {
