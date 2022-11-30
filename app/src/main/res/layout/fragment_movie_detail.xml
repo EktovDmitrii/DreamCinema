@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/DarkSlateGray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.MovieDetailFragment">
 
@@ -61,9 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Avatar"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxWidth="200dp"
+            android:maxLines="2"
+            android:singleLine="false"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
 
@@ -86,7 +92,7 @@
             tools:text="2020"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
 
@@ -109,7 +115,7 @@
             tools:text="8,52342424242234522345"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
 
@@ -131,6 +137,7 @@
         android:layout_height="wrap_content"
         tools:text="info about movie"
         android:layout_margin="15dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_watch_movie" />

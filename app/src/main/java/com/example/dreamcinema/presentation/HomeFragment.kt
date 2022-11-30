@@ -77,9 +77,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun launchDetailFragment(movieId: Int) {
-        childFragmentManager.popBackStack()
-        childFragmentManager.beginTransaction()
-            .replace(R.id.detail_fragment_container, MovieDetailFragment.newInstance(movieId))
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
             .addToBackStack(null)
             .commit()
     }

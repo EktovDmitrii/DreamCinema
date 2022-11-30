@@ -16,12 +16,6 @@
         android:layout_height="wrap_content"
         tools:context=".presentation.HomeFragment">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/detail_fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".presentation.MainActivity"
-            tools:layout="@layout/fragment_movie_detail"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -38,6 +32,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.cardview.widget.CardView>
 
