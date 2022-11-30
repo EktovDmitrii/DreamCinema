@@ -5,6 +5,8 @@
     <string name="in_role_of">As: </string>
     <string name="top_rated">Top rated movies </string>
     <string name="watch_trailer">Watch trailer </string>
+    <string name="film_cast">Film cast </string>
+    <string name="recommended">Recommended for you </string>
 
 
 </resources>

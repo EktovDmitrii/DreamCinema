@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/DarkSlateGray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.MovieDetailFragment">
+    tools:context=".presentation.MovieDetailFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/DarkSlateGray">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/background_container"
@@ -142,15 +148,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_watch_movie" />
 
+    <TextView
+        android:id="@+id/tv_film_cast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/film_cast"
+        android:layout_margin="15dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_overview"
+        app:layout_constraintBottom_toTopOf="@id/rv_cast_info"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cast_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="25dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_overview"
+        app:layout_constraintTop_toBottomOf="@id/tv_film_cast"
         tools:listitem="@layout/cast_card" />
 
+    <TextView
+        android:id="@+id/tv_similar_movies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recommended"
+        android:layout_margin="15dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_cast_info" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

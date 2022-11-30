@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/DarkSlateGray"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:layout_margin="5dp"
             android:text="@string/in_role_of"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="start"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,13 +71,13 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:maxWidth="200dp"
+            android:ellipsize="end"
             android:maxLines="2"
             android:singleLine="false"
             android:gravity="end"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_actor_info_label"
             app:layout_constraintTop_toBottomOf="@id/tv_actor_name"
             tools:text="main character" />
