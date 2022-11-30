@@ -33,12 +33,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var adapterVertical: VerticalMovieInfoAdapter
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         component.inject(this)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +66,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
     private fun setObservers() {
         viewModel.listMovie.observe(viewLifecycleOwner) { listMovie ->
             adapterVertical.myData = listMovie
@@ -88,6 +85,5 @@ class HomeFragment : Fragment() {
         fun newInstance(): Fragment {
             return HomeFragment()
         }
-
     }
 }

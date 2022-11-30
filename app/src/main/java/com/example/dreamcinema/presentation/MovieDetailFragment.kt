@@ -11,6 +11,7 @@ import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
 import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoViewHolder
+import com.example.dreamcinema.presentation.adapter.MovieCastAdapter
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
@@ -27,6 +28,8 @@ class MovieDetailFragment : Fragment() {
     }
 
     private lateinit var viewModel: MovieDetailViewModel
+
+    private lateinit var adapter: MovieCastAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,6 +49,10 @@ class MovieDetailFragment : Fragment() {
         val movieId = getMovieId()
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
         viewModel.getDetailsInfo(movieId)
+        viewModel.getCastInfo(movieId)
+        adapter = MovieCastAdapter()
+        binding.rvCastInfo.adapter = adapter
+
         setObservers()
     }
 
@@ -63,6 +70,9 @@ class MovieDetailFragment : Fragment() {
                 .into(binding.ivMovieDetailPoster)
             Picasso.get().load(BASE_POSTER_URL + movie.backdropPath)
                 .into(binding.ivBackgroundPoster)
+        }
+        viewModel.cast.observe(viewLifecycleOwner){
+            adapter.myData = it
         }
     }
 

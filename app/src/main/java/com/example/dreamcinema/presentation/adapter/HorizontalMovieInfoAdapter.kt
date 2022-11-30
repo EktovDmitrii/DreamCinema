@@ -7,13 +7,18 @@ import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
-class HorizontalMovieInfoAdapter @Inject constructor(val listener: OnMovieClickListener
+class HorizontalMovieInfoAdapter @Inject constructor(
+    val listener: OnMovieClickListener
 ) : RecyclerView.Adapter<HorizontalMovieInfoViewHolder>() {
 
     var myData: List<MovieInfo> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalMovieInfoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_info, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): HorizontalMovieInfoViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.movie_info, parent, false)
         return HorizontalMovieInfoViewHolder(view)
     }
 

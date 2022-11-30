@@ -1,5 +1,7 @@
 package com.example.dreamcinema.data.network.api
 
+import com.example.dreamcinema.data.network.MovieCastDto
+import com.example.dreamcinema.data.network.MovieCastListDto
 import com.example.dreamcinema.data.network.MovieInfoDto
 import com.example.dreamcinema.data.network.MovieInfoListDto
 import retrofit2.http.GET
@@ -42,8 +44,15 @@ interface ApiService {
     suspend fun getDetails(
         @Path("movie_id") movieId: Int,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
-        @Query(QUERY_PARAM_LANGUAGE) language: String = "LANGUAGE"
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieInfoDto
+
+    @GET("3/movie/{movie_id}/credits")
+    suspend fun getMovieCast(
+        @Path("movie_id") movieId: Int,
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieCastListDto
 
 
     companion object {

@@ -6,7 +6,10 @@ import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.databinding.FragmentHomeHorizontalBinding
 import com.example.dreamcinema.domain.MovieList
 
-class VerticalMovieInfoViewHolder(itemView: View, listener: HorizontalMovieInfoAdapter.OnMovieClickListener) : RecyclerView.ViewHolder(itemView) {
+class VerticalMovieInfoViewHolder(
+    itemView: View,
+    listener: HorizontalMovieInfoAdapter.OnMovieClickListener
+) : RecyclerView.ViewHolder(itemView) {
 
     private val binding: FragmentHomeHorizontalBinding =
         FragmentHomeHorizontalBinding.bind(itemView)

@@ -1,8 +1,7 @@
 package com.example.dreamcinema.data.RepositoryImpl
 
-import com.example.dreamcinema.data.network.MovieInfoDto
-import com.example.dreamcinema.data.network.MovieInfoListDto
 import com.example.dreamcinema.data.network.api.ApiService
+import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.MovieList
 import com.example.dreamcinema.domain.MovieRepository
@@ -103,6 +102,24 @@ class MovieRepositoryImpl @Inject constructor(
                 popularity = popularity,
                 backdropPath = backdropPath,
                 genreIds = genreIds
+            )
+        }
+    }
+
+    override suspend fun getMovieCast(movieId: Int): List<MovieCast> {
+        return apiService.getMovieCast(movieId).cast.map {
+            MovieCast(
+                adult = it.adult,
+                gender = it.gender,
+                id = it.id,
+                knownForDepartment = it.knownForDepartment,
+                name = it.name,
+                popularity = it.popularity,
+                profilePath = it.profilePath,
+                castId = it.castId,
+                character = it.character,
+                creditId = it.creditId,
+                order = it.order
             )
         }
     }
