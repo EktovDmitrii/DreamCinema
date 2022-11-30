@@ -107,7 +107,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieCast(movieId: Int): List<MovieCast> {
-        return apiService.getMovieCast(movieId).cast.map {
+        val result = apiService.getMovieCast(movieId).cast.map {
             MovieCast(
                 adult = it.adult,
                 gender = it.gender,
@@ -122,5 +122,6 @@ class MovieRepositoryImpl @Inject constructor(
                 order = it.order
             )
         }
+        return result
     }
 }

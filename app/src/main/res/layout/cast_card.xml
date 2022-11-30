@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/DarkSlateGray"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             app:cardBackgroundColor="@color/DarkSlateGray"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@id/tv_actor_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,40 +48,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_actor_image_container"
-            tools:text="film" />
+            tools:text="Marlon Brando" />
 
         <TextView
             android:id="@+id/tv_actor_info_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/film_rating"
+            android:text="@string/in_role_of"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/guideline_middle"
+            android:gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_actor_name" />
 
         <TextView
             android:id="@+id/tv_actor_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:maxWidth="200dp"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:gravity="end"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_actor_info_label"
             app:layout_constraintTop_toBottomOf="@id/tv_actor_name"
-            tools:text="8,5" />
+            tools:text="main character" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_middle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
