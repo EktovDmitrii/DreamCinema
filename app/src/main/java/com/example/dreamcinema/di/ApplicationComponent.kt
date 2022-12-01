@@ -2,6 +2,10 @@ package com.example.dreamcinema.di
 
 import android.app.Application
 import com.example.dreamcinema.presentation.*
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
+import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
+import com.example.dreamcinema.presentation.genreFragment.GenreFragment
+import com.example.dreamcinema.presentation.homeFragment.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
 

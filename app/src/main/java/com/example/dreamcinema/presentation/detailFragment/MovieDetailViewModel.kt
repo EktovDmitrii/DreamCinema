@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.detailFragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData

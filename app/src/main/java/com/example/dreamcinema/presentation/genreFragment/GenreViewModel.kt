@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.genreFragment
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

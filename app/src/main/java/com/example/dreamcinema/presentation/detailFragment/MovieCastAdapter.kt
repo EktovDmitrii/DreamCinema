@@ -1,19 +1,21 @@
-package com.example.dreamcinema.presentation.adapter
+package com.example.dreamcinema.presentation.detailFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieCast
+import com.example.dreamcinema.domain.MovieCastList
+import com.example.dreamcinema.presentation.adapter.MovieCastDiffCallback
 import javax.inject.Inject
 
-class MovieCastAdapter @Inject constructor(): RecyclerView.Adapter<MovieCastViewHolder>(){
+class MovieCastAdapter @Inject constructor(
+
+): ListAdapter<MovieCast, MovieCastViewHolder>(MovieCastDiffCallback){
 
     var myData: List<MovieCast> = listOf()
-    set(value)  {
-        field = value
-        notifyDataSetChanged()
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieCastViewHolder {
         val view = LayoutInflater.from(parent.context)

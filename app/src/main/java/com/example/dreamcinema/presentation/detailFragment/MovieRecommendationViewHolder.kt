@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation.adapter
+package com.example.dreamcinema.presentation.detailFragment
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

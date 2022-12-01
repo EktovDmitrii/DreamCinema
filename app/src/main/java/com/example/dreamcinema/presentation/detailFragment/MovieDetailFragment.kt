@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.detailFragment
 
 import android.content.Context
 import android.os.Bundle
@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.presentation.adapter.MovieCastAdapter
-import com.example.dreamcinema.presentation.adapter.MovieRecommendationAdapter
+import com.example.dreamcinema.presentation.MovieApp
+import com.example.dreamcinema.presentation.ViewModelFactory
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -90,9 +90,11 @@ class MovieDetailFragment : Fragment() {
         }
         viewModel.cast.observe(viewLifecycleOwner) {
             castadapter.myData = it
+            castadapter.submitList(it)
         }
         viewModel.recommendation.observe(viewLifecycleOwner) {
             recommendationAdapter.myData = it
+            recommendationAdapter.submitList(it)
         }
     }
 

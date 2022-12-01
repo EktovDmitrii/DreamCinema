@@ -1,36 +1,31 @@
-package com.example.dreamcinema.presentation.adapter
+package com.example.dreamcinema.presentation.homeFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
-import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
-class MovieRecommendationAdapter @Inject constructor(
+class HorizontalMovieInfoAdapter @Inject constructor(
     val listener: OnMovieClickListener
-) : RecyclerView.Adapter<MovieRecommendationViewHolder>() {
+) : RecyclerView.Adapter<HorizontalMovieInfoViewHolder>() {
 
-    var myData: List<MovieInfo> = listOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    var myData: List<MovieInfo> = emptyList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MovieRecommendationViewHolder {
+    ): HorizontalMovieInfoViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recommendation_card, parent, false)
-        return MovieRecommendationViewHolder(view)
+            .inflate(R.layout.movie_info, parent, false)
+        return HorizontalMovieInfoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieRecommendationViewHolder, position: Int) {
+    override fun onBindViewHolder(holderHorizontal: HorizontalMovieInfoViewHolder, position: Int) {
         val movie = myData[position]
-        holder.bind(movie)
-        holder.itemView.setOnClickListener {
+        holderHorizontal.bind(movie)
+        holderHorizontal.itemView.setOnClickListener {
             listener.onMovieClick(movie)
         }
     }
@@ -42,4 +37,5 @@ class MovieRecommendationAdapter @Inject constructor(
     interface OnMovieClickListener {
         fun onMovieClick(movieInfo: MovieInfo)
     }
+
 }

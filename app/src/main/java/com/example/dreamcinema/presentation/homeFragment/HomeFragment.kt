@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.homeFragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,8 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoAdapter
-import com.example.dreamcinema.presentation.adapter.VerticalMovieInfoAdapter
+import com.example.dreamcinema.presentation.MovieApp
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
+import com.example.dreamcinema.presentation.ViewModelFactory
 import javax.inject.Inject
 
 

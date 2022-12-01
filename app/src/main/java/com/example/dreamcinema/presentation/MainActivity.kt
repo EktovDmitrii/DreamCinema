@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.ActivityMainBinding
+import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
+import com.example.dreamcinema.presentation.genreFragment.GenreFragment
+import com.example.dreamcinema.presentation.homeFragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 

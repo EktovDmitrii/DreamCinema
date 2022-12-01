@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.homeFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

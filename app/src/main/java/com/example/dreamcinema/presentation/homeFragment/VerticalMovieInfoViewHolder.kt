@@ -1,8 +1,7 @@
-package com.example.dreamcinema.presentation.adapter
+package com.example.dreamcinema.presentation.homeFragment
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.databinding.FragmentHomeHorizontalBinding
 import com.example.dreamcinema.domain.MovieList
 

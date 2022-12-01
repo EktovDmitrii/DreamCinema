@@ -1,4 +1,4 @@
-package com.example.dreamcinema.presentation
+package com.example.dreamcinema.presentation.genreFragment
 
 import android.content.Context
 import android.os.Bundle
@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.dreamcinema.R
-import com.example.dreamcinema.databinding.FragmentFavouriteBinding
 import com.example.dreamcinema.databinding.FragmentGenreBinding
+import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
+import com.example.dreamcinema.presentation.MovieApp
+import com.example.dreamcinema.presentation.ViewModelFactory
 import javax.inject.Inject
 
 class GenreFragment : Fragment() {
