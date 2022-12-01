@@ -2,17 +2,14 @@ package com.example.dreamcinema.presentation
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.dreamcinema.R
-import com.example.dreamcinema.databinding.FragmentHomeBinding
+import com.bumptech.glide.Glide
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
-import com.example.dreamcinema.presentation.adapter.HorizontalMovieInfoViewHolder
 import com.example.dreamcinema.presentation.adapter.MovieCastAdapter
-import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -66,9 +63,9 @@ class MovieDetailFragment : Fragment() {
             binding.tvMovieDetailRate.text = movie.voteAverage.toString()
             binding.tvMovieDetailReleaseDate.text = movie.releaseDate
             binding.tvMovieDetailTitle.text = movie.title
-            Picasso.get().load(BASE_URL + movie.posterPath)
+            Glide.with(this).load(BASE_URL + movie.posterPath)
                 .into(binding.ivMovieDetailPoster)
-            Picasso.get().load(BASE_POSTER_URL + movie.backdropPath)
+            Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
                 .into(binding.ivBackgroundPoster)
         }
         viewModel.cast.observe(viewLifecycleOwner){

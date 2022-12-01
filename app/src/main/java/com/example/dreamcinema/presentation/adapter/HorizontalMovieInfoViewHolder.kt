@@ -2,11 +2,9 @@ package com.example.dreamcinema.presentation.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dreamcinema.data.network.MovieInfoDto
+import com.bumptech.glide.Glide
 import com.example.dreamcinema.databinding.MovieInfoBinding
 import com.example.dreamcinema.domain.MovieInfo
-import com.squareup.picasso.Picasso
-import javax.inject.Inject
 
 class HorizontalMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -15,7 +13,7 @@ class HorizontalMovieInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     fun bind(movieInfo: MovieInfo) {
         binding.tvFilmName.text = movieInfo.title
         binding.tvFilmRate.text = movieInfo.voteAverage.toString()
-        Picasso.get().load(BASE_URL + movieInfo.posterPath)
+        Glide.with(itemView).load(BASE_URL + movieInfo.posterPath)
             .into(binding.ivFilmLogo)
 
     }
