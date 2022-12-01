@@ -9,27 +9,37 @@ import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
 class MovieRecommendationAdapter @Inject constructor(
-
-): RecyclerView.Adapter<MovieRecommendationViewHolder>(){
+    val listener: OnMovieClickListener
+) : RecyclerView.Adapter<MovieRecommendationViewHolder>() {
 
     var myData: List<MovieInfo> = listOf()
-    set(value)  {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieRecommendationViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MovieRecommendationViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recommendation_card, parent, false)
         return MovieRecommendationViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MovieRecommendationViewHolder, position: Int) {
-val actors = myData[position]
-        holder.bind(actors)
+        val movie = myData[position]
+        holder.bind(movie)
+        holder.itemView.setOnClickListener {
+            listener.onMovieClick(movie)
+        }
     }
 
     override fun getItemCount(): Int {
         return myData.size
+    }
+
+    interface OnMovieClickListener {
+        fun onMovieClick(movieInfo: MovieInfo)
     }
 }
