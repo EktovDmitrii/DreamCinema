@@ -189,6 +189,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_cast_info" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recommended_movies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_similar_movies"
+        tools:listitem="@layout/recommendation_card" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
 import com.example.dreamcinema.presentation.adapter.MovieCastAdapter
+import com.example.dreamcinema.presentation.adapter.MovieRecommendationAdapter
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -26,7 +27,9 @@ class MovieDetailFragment : Fragment() {
 
     private lateinit var viewModel: MovieDetailViewModel
 
-    private lateinit var adapter: MovieCastAdapter
+    private lateinit var castadapter: MovieCastAdapter
+
+    private lateinit var recommendationAdapter: MovieRecommendationAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,9 +50,15 @@ class MovieDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
         viewModel.getDetailsInfo(movieId)
         viewModel.getCastInfo(movieId)
-        adapter = MovieCastAdapter()
-        binding.rvCastInfo.adapter = adapter
+        viewModel.getRecommendedMovies(movieId)
+        setAdapter()
+    }
 
+    private fun setAdapter() {
+        castadapter = MovieCastAdapter()
+        binding.rvCastInfo.adapter = castadapter
+        recommendationAdapter = MovieRecommendationAdapter()
+        binding.rvRecommendedMovies.adapter = recommendationAdapter
         setObservers()
     }
 
@@ -69,7 +78,10 @@ class MovieDetailFragment : Fragment() {
                 .into(binding.ivBackgroundPoster)
         }
         viewModel.cast.observe(viewLifecycleOwner){
-            adapter.myData = it
+            castadapter.myData = it
+        }
+        viewModel.recommendation.observe(viewLifecycleOwner){
+            recommendationAdapter.myData = it
         }
     }
 

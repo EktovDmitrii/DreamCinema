@@ -54,6 +54,13 @@ interface ApiService {
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieCastListDto
 
+    @GET("3/movie/{movie_id}/similar")
+    suspend fun getRecommendedMovies(
+        @Path("movie_id") movieId: Int,
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
+
 
     companion object {
 

@@ -11,6 +11,7 @@ import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.useCases.GetDetailInfoUseCase
 import com.example.dreamcinema.domain.useCases.GetMovieCastUseCase
+import com.example.dreamcinema.domain.useCases.GetRecommendedMoviesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 class MovieDetailViewModel @Inject constructor(
     private val getDetailInfoUseCase: GetDetailInfoUseCase,
-    private val getMovieCastUseCase: GetMovieCastUseCase
+    private val getMovieCastUseCase: GetMovieCastUseCase,
+    private val getRecommendedMoviesUseCase: GetRecommendedMoviesUseCase
 ) : ViewModel() {
 
     private val _movie = MutableLiveData<MovieInfo>()
@@ -29,6 +31,10 @@ class MovieDetailViewModel @Inject constructor(
     private val _cast = MutableLiveData<List<MovieCast>>()
     val cast: LiveData<List<MovieCast>>
         get() = _cast
+
+    private val _recommendation = MutableLiveData<List<MovieInfo>>()
+    val recommendation: LiveData<List<MovieInfo>>
+        get() = _recommendation
 
 
     fun getDetailsInfo(id: Int) {
@@ -46,6 +52,15 @@ class MovieDetailViewModel @Inject constructor(
             withContext((Dispatchers.Main)) {
                 _cast.value = castInfo
                 Log.d("CastCheck", "${castInfo.toString()}")
+            }
+        }
+    }
+
+    fun getRecommendedMovies(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val recommendation = getRecommendedMoviesUseCase(id)
+            withContext((Dispatchers.Main)) {
+                _recommendation.value = recommendation
             }
         }
     }

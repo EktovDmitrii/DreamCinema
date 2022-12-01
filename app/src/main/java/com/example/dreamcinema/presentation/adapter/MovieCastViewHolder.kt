@@ -14,7 +14,7 @@ class MovieCastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(movieCast: MovieCast) {
         binding.tvActorName.text = movieCast.name
-        binding.tvActorInfo.text = movieCast.character
+        binding.tvCharacter.text = movieCast.character
         if (movieCast.profilePath != null) {
             Glide.with(itemView).load(BASE_URL + movieCast.profilePath)
                 .into(binding.ivActorImage)

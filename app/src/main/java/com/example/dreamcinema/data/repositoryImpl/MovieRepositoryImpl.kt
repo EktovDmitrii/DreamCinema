@@ -1,4 +1,4 @@
-package com.example.dreamcinema.data.RepositoryImpl
+package com.example.dreamcinema.data.repositoryImpl
 
 import com.example.dreamcinema.data.network.api.ApiService
 import com.example.dreamcinema.domain.MovieCast
@@ -123,5 +123,22 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
         return result
+    }
+
+    override suspend fun getRecommendedMoviesList(movieId: Int): List<MovieInfo> {
+        return apiService.getRecommendedMovies(movieId).movieList.map { it ->
+            MovieInfo(
+                id = it.id,
+                posterPath = it.posterPath,
+                releaseDate = it.releaseDate,
+                title = it.title,
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
+            )
+        }
     }
 }
