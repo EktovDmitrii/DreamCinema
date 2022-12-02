@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.databinding.FragmentGenreBinding
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
@@ -30,6 +32,10 @@ class GenreFragment : Fragment() {
 
     private lateinit var adapter: GenreAdapter
 
+    private lateinit var courseRv: RecyclerView
+
+    private lateinit var courseList: ArrayList<CourseRvModel>
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         component.inject(this)
@@ -47,14 +53,19 @@ class GenreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[GenreViewModel::class.java]
         viewModel.getGenreInfo()
-        setAdapter()
+        setGridAdapter()
         setObservers()
     }
 
-    private fun setAdapter() {
-        adapter = GenreAdapter()
-        binding.rvCastInfo.adapter = adapter
+    private fun setGridAdapter() {
+        courseRv = binding.rvCastInfo
+        courseList = ArrayList()
+        val layoutManager = GridLayoutManager(context, 2)
+        courseRv.layoutManager = layoutManager
+        adapter = GenreAdapter(courseList, context)
+        courseRv.adapter = adapter
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

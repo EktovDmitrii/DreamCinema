@@ -1,5 +1,6 @@
 package com.example.dreamcinema.presentation.genreFragment
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -8,6 +9,8 @@ import com.example.dreamcinema.domain.Genre
 import javax.inject.Inject
 
 class GenreAdapter @Inject constructor(
+    private val courseList: ArrayList<CourseRvModel>,
+    private val context: Context?
 ):ListAdapter<Genre, GenreViewHolder>(MovieGenreDiffCallback) {
 
     var myData: List<Genre> = emptyList()
