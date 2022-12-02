@@ -1,4 +1,4 @@
-package com.example.dreamcinema.data.network
+package com.example.dreamcinema.data.network.api.dto
 
 import com.google.gson.annotations.SerializedName
 

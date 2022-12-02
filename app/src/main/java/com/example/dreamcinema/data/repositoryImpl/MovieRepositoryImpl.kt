@@ -1,10 +1,7 @@
 package com.example.dreamcinema.data.repositoryImpl
 
 import com.example.dreamcinema.data.network.api.ApiService
-import com.example.dreamcinema.domain.MovieCast
-import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.domain.MovieList
-import com.example.dreamcinema.domain.MovieRepository
+import com.example.dreamcinema.domain.*
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -138,6 +135,15 @@ class MovieRepositoryImpl @Inject constructor(
                 popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
+            )
+        }
+    }
+
+    override suspend fun getGenreInfo(): List<Genre> {
+        return apiService.getGenre().genres.map {
+            Genre(
+                id = it.id,
+                name = it.name
             )
         }
     }

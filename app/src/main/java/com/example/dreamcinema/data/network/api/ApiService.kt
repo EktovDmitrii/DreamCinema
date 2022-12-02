@@ -1,9 +1,9 @@
 package com.example.dreamcinema.data.network.api
 
-import com.example.dreamcinema.data.network.MovieCastDto
-import com.example.dreamcinema.data.network.MovieCastListDto
-import com.example.dreamcinema.data.network.MovieInfoDto
-import com.example.dreamcinema.data.network.MovieInfoListDto
+import com.example.dreamcinema.data.network.api.dto.GenreListDto
+import com.example.dreamcinema.data.network.api.dto.MovieCastListDto
+import com.example.dreamcinema.data.network.api.dto.MovieInfoDto
+import com.example.dreamcinema.data.network.api.dto.MovieInfoListDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -60,6 +60,12 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieInfoListDto
+
+    @GET("3/genre/movie/list")
+    suspend fun getGenre(
+        @Query(QUERY_PARAM_API_KEY) api_key: String = API_KEY_VALUE,
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): GenreListDto
 
 
     companion object {

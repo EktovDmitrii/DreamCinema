@@ -1,8 +1,5 @@
 package com.example.dreamcinema.domain
 
-import androidx.lifecycle.LiveData
-import com.example.dreamcinema.data.network.MovieInfoDto
-
 interface MovieRepository {
 
     suspend fun getTopMovieInfoList(): List<MovieInfo>
@@ -20,4 +17,6 @@ interface MovieRepository {
     suspend fun getMovieCast(movieId: Int):List<MovieCast>
 
     suspend fun getRecommendedMoviesList(movieId: Int): List<MovieInfo>
+
+    suspend fun getGenreInfo(): List<Genre>
 }
