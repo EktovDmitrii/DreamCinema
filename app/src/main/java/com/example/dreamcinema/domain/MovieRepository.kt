@@ -19,4 +19,6 @@ interface MovieRepository {
     suspend fun getRecommendedMoviesList(movieId: Int): List<MovieInfo>
 
     suspend fun getGenreInfo(): List<Genre>
+
+    suspend fun getMoviesByGenre(genreId: Int): List<MovieInfo>
 }

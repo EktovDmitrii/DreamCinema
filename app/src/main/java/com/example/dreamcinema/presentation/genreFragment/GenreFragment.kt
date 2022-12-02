@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentGenreBinding
+import com.example.dreamcinema.domain.Genre
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
 import javax.inject.Inject
 
@@ -62,7 +65,15 @@ class GenreFragment : Fragment() {
         courseList = ArrayList()
         val layoutManager = GridLayoutManager(context, 2)
         courseRv.layoutManager = layoutManager
-        adapter = GenreAdapter(courseList, context)
+        adapter = GenreAdapter(
+            courseList,
+            context,
+            object : GenreAdapter.OnGenreClickListener {
+                override fun onGenreClick(genre: Genre) {
+                    launchMovieFragment(genre.id)
+                }
+            }
+        )
         courseRv.adapter = adapter
     }
 
@@ -70,6 +81,13 @@ class GenreFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun launchMovieFragment(genreId: Int) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, MoviesByGenreFragment.newInstance(genreId))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setObservers() {

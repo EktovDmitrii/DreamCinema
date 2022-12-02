@@ -147,4 +147,21 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
     }
+
+    override suspend fun getMoviesByGenre(genreId: Int): List<MovieInfo> {
+        return apiService.getMoviesByGenre(genreId).movieList.map {
+            MovieInfo(
+                id = it.id,
+                posterPath = it.posterPath,
+                releaseDate = it.releaseDate,
+                title = it.title,
+                voteAverage = it.voteAverage,
+                video = it.video,
+                overview = it.overview,
+                popularity = it.popularity,
+                backdropPath = it.backdropPath,
+                genreIds = it.genreIds
+            )
+        }
+    }
 }

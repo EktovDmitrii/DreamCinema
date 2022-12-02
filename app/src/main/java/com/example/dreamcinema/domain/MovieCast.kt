@@ -1,7 +1,10 @@
 package com.example.dreamcinema.domain
 
-data class MovieCast(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+data class MovieCast(
 val adult : Boolean,
 val gender : Int,
 val id : Int,
@@ -13,4 +16,4 @@ val castId : Int,
 val character : String?,
 val creditId : String?,
 val order : Int
-)
+): Parcelable

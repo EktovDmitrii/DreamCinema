@@ -42,21 +42,21 @@ interface ApiService {
 
     @GET("3/movie/{movie_id}")
     suspend fun getDetails(
-        @Path("movie_id") movieId: Int,
+        @Path(MOVIE_ID) movieId: Int,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieInfoDto
 
     @GET("3/movie/{movie_id}/credits")
     suspend fun getMovieCast(
-        @Path("movie_id") movieId: Int,
+        @Path(MOVIE_ID) movieId: Int,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieCastListDto
 
     @GET("3/movie/{movie_id}/similar")
     suspend fun getRecommendedMovies(
-        @Path("movie_id") movieId: Int,
+        @Path(MOVIE_ID) movieId: Int,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): MovieInfoListDto
@@ -67,6 +67,12 @@ interface ApiService {
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
     ): GenreListDto
 
+    @GET("3/discover/movie")
+    suspend fun getMoviesByGenre(
+        @Query(GENRE_ID) genreId: Int,
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
+        @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
+    ): MovieInfoListDto
 
     companion object {
 
@@ -74,5 +80,7 @@ interface ApiService {
         private const val QUERY_PARAM_LANGUAGE = "language"
         private const val LANGUAGE = "eng-ENG"
         private const val API_KEY_VALUE = "139c985f543aaf9db3e818b31275a4c1"
+        private const val MOVIE_ID = "movie_id"
+        private const val GENRE_ID = "with_genres"
     }
 }

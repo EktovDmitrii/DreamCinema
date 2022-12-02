@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.Genre
+import com.example.dreamcinema.domain.MovieInfo
+import com.example.dreamcinema.presentation.detailFragment.MovieRecommendationAdapter
 import javax.inject.Inject
 
 class GenreAdapter @Inject constructor(
     private val courseList: ArrayList<CourseRvModel>,
-    private val context: Context?
+    private val context: Context?,
+    val listener: OnGenreClickListener
 ):ListAdapter<Genre, GenreViewHolder>(MovieGenreDiffCallback) {
 
     var myData: List<Genre> = emptyList()
@@ -24,9 +27,16 @@ class GenreAdapter @Inject constructor(
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         val genre = myData[position]
         holder.bind(genre)
+        holder.itemView.setOnClickListener {
+            listener.onGenreClick(genre)
+        }
     }
 
     override fun getItemCount(): Int {
         return myData.size
+    }
+
+    interface OnGenreClickListener {
+        fun onGenreClick(genre: Genre)
     }
 }

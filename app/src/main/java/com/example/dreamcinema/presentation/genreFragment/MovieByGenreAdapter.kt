@@ -1,0 +1,30 @@
+package com.example.dreamcinema.presentation.genreFragment
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import com.example.dreamcinema.R
+import com.example.dreamcinema.domain.MovieInfo
+import javax.inject.Inject
+
+class MovieByGenreAdapter @Inject constructor(
+
+): ListAdapter<MovieInfo, MovieByGenreViewHolder>(MovieByGenreDiffCallBack){
+
+    var myData: List<MovieInfo> = emptyList()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieByGenreViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.movie_by_genre_card, parent, false)
+        return MovieByGenreViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: MovieByGenreViewHolder, position: Int) {
+      val movie = myData[position]
+        holder.bind(movie)
+    }
+
+    override fun getItemCount(): Int {
+        return myData.size
+    }
+}

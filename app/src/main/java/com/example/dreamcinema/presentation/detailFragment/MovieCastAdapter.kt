@@ -3,10 +3,8 @@ package com.example.dreamcinema.presentation.detailFragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieCast
-import com.example.dreamcinema.domain.MovieCastList
 import com.example.dreamcinema.presentation.adapter.MovieCastDiffCallback
 import javax.inject.Inject
 

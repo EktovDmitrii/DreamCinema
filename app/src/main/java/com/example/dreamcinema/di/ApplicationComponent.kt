@@ -5,6 +5,7 @@ import com.example.dreamcinema.presentation.*
 import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
 import com.example.dreamcinema.presentation.genreFragment.GenreFragment
+import com.example.dreamcinema.presentation.genreFragment.MoviesByGenreFragment
 import com.example.dreamcinema.presentation.homeFragment.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -24,6 +25,8 @@ interface ApplicationComponent {
     fun inject(fragment: GenreFragment)
 
     fun inject(fragment: MovieDetailFragment)
+
+    fun inject(fragment: MoviesByGenreFragment)
 
 
     @Component.Factory
