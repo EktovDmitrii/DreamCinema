@@ -1,11 +1,17 @@
 package com.example.dreamcinema.data.repositoryImpl
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.dreamcinema.data.dataBase.Mapper
+import com.example.dreamcinema.data.dataBase.MovieDao
 import com.example.dreamcinema.data.network.api.ApiService
 import com.example.dreamcinema.domain.*
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val mapper: Mapper,
+    private val movieDao: MovieDao
 ) : MovieRepository {
 
 
@@ -19,7 +25,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
@@ -36,7 +41,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
@@ -53,7 +57,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
@@ -70,7 +73,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
@@ -96,7 +98,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = voteAverage,
                 video = video,
                 overview = overview,
-                popularity = popularity,
                 backdropPath = backdropPath,
                 genreIds = genreIds
             )
@@ -132,7 +133,6 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
@@ -158,10 +158,28 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = it.voteAverage,
                 video = it.video,
                 overview = it.overview,
-                popularity = it.popularity,
                 backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
+    }
+
+    override suspend fun addMovie(movieInfo: MovieInfo) {
+        movieDao.addMovie(mapper.mapEntityToDbModel(movieInfo))
+    }
+
+    override suspend fun getMovie(movieId: Int): MovieInfo {
+        val dbModel = movieDao.getMovie(movieId)
+        return mapper.mapDbModelToEntity(dbModel)
+    }
+
+    override suspend fun getMovieList(): LiveData<List<MovieInfo>> = Transformations.map(
+        movieDao.getMovieList()
+    ) {
+        mapper.mapListDbModelToEntity(it)
+    }
+
+    override suspend fun deleteMovie(movieInfo: MovieInfo) {
+        movieDao.deleteMovie(movieInfo.id)
     }
 }

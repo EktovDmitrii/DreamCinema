@@ -11,7 +11,6 @@ data class MovieInfoDto(
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("video") val video : Boolean,
     @SerializedName("overview") val overview : String,
-    @SerializedName("popularity") val popularity : Double,
     @SerializedName("backdrop_path") val backdropPath : String?,
     @SerializedName("genre_ids") val genreIds : List<Int>?,
 

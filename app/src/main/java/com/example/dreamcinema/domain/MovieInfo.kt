@@ -15,7 +15,6 @@ data class MovieInfo @Inject constructor(
     var voteAverage: Double,
     val video : Boolean,
     val overview : String,
-    val popularity : Double,
     val backdropPath : String?,
     val genreIds : List<Int>?,
 ): Parcelable
