@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.databinding.FragmentFavouriteBinding
 import com.example.dreamcinema.presentation.CourseRvModel
@@ -53,9 +54,10 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[FavouriteViewModel::class.java]
+        viewModel.getListFavouriteMovies()
         setAdapter()
         setObservers()
-        viewModel.getListFavouriteMovies()
+
     }
 
     private fun setObservers() {
@@ -77,6 +79,29 @@ class FavouriteFragment : Fragment() {
         courseRv.layoutManager = layoutManager
         adapter = FavouriteAdapter(courseList, context)
         courseRv.adapter = adapter
+        setupSwipeListener(binding.rvFavouriteMovies)
+    }
+
+    private fun setupSwipeListener(rvFavouriteMovie: RecyclerView) {
+        val callback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = adapter.currentList[viewHolder.adapterPosition]
+                viewModel.deleteFromFavourite(item)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(rvFavouriteMovie)
     }
 
     companion object {
