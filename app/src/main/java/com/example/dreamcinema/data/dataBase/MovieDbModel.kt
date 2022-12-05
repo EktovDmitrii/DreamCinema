@@ -2,6 +2,7 @@ package com.example.dreamcinema.data.dataBase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 
 @Entity(tableName = "favourite_movies")
 data class MovieDbModel(
@@ -14,5 +15,6 @@ data class MovieDbModel(
     val video: Boolean,
     val overview: String,
     val backdropPath: String?,
-    val genreIds: List<Int>?,
+   @TypeConverters(ListConvertor::class)
+    val genreIds: List<Int>?
 )

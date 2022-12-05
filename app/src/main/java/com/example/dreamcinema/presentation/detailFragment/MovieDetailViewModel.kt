@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieInfo
+import com.example.dreamcinema.domain.useCases.AddMovieUseCase
 import com.example.dreamcinema.domain.useCases.GetDetailInfoUseCase
 import com.example.dreamcinema.domain.useCases.GetMovieCastUseCase
 import com.example.dreamcinema.domain.useCases.GetRecommendedMoviesUseCase
@@ -19,12 +20,17 @@ import javax.inject.Inject
 class MovieDetailViewModel @Inject constructor(
     private val getDetailInfoUseCase: GetDetailInfoUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
-    private val getRecommendedMoviesUseCase: GetRecommendedMoviesUseCase
+    private val getRecommendedMoviesUseCase: GetRecommendedMoviesUseCase,
+    private val addMovieUseCase: AddMovieUseCase
 ) : ViewModel() {
 
     private val _movie = MutableLiveData<MovieInfo>()
     val movie: LiveData<MovieInfo>
         get() = _movie
+
+    private val _favouriteMovie = MutableLiveData<MovieInfo>()
+    val favouriteMovie: LiveData<MovieInfo>
+        get() = _favouriteMovie
 
     private val _cast = MutableLiveData<List<MovieCast>>()
     val cast: LiveData<List<MovieCast>>
@@ -60,6 +66,13 @@ class MovieDetailViewModel @Inject constructor(
             withContext((Dispatchers.Main)) {
                 _recommendation.value = recommendation
             }
+        }
+    }
+
+    fun addFavouriteMovie(movieInfo: MovieInfo){
+        viewModelScope.launch(Dispatchers.IO) {
+           addMovieUseCase(movieInfo)
+
         }
     }
 

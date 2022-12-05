@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.Genre
-import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.presentation.detailFragment.MovieRecommendationAdapter
+import com.example.dreamcinema.presentation.CourseRvModel
 import javax.inject.Inject
 
 class GenreAdapter @Inject constructor(

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentGenreBinding
 import com.example.dreamcinema.domain.Genre
+import com.example.dreamcinema.presentation.CourseRvModel
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
-import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
 import javax.inject.Inject
 

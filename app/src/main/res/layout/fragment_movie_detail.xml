@@ -128,7 +128,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_watch_movie"
+        android:id="@+id/btn_add_to_favourite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/watch_trailer"
@@ -146,7 +146,7 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_watch_movie" />
+        app:layout_constraintTop_toBottomOf="@id/btn_add_to_favourite" />
 
     <TextView
         android:id="@+id/tv_film_cast"

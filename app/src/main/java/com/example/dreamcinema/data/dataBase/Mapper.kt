@@ -21,7 +21,7 @@ class Mapper @Inject constructor() {
         id = movieDbModel.id,
         posterPath = movieDbModel.posterPath,
         releaseDate = movieDbModel.releaseDate,
-        title = movieDbModel.releaseDate,
+        title = movieDbModel.title,
         voteAverage = movieDbModel.voteAverage,
         video = movieDbModel.video,
         overview = movieDbModel.overview,

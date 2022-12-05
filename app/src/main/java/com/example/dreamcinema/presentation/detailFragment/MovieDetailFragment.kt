@@ -80,6 +80,9 @@ class MovieDetailFragment : Fragment() {
     private fun setObservers() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.tvMovieOverview.text = movie.overview
+            binding.btnAddToFavourite.setOnClickListener {
+                addToFavourite(movie)
+            }
             binding.tvMovieDetailRate.text = movie.voteAverage.toString()
             binding.tvMovieDetailReleaseDate.text = movie.releaseDate
             binding.tvMovieDetailTitle.text = movie.title
@@ -96,6 +99,10 @@ class MovieDetailFragment : Fragment() {
             recommendationAdapter.myData = it
             recommendationAdapter.submitList(it)
         }
+    }
+
+    private fun addToFavourite(movieInfo: MovieInfo){
+viewModel.addFavouriteMovie(movieInfo)
     }
 
     private fun launchDetailFragment(movieId: Int) {

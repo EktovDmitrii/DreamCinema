@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieCast
-import com.example.dreamcinema.presentation.adapter.MovieCastDiffCallback
 import javax.inject.Inject
 
 class MovieCastAdapter @Inject constructor(

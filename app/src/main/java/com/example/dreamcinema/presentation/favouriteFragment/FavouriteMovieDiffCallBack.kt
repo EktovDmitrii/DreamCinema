@@ -1,9 +1,9 @@
-package com.example.dreamcinema.presentation.genreFragment
+package com.example.dreamcinema.presentation.favouriteFragment
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.dreamcinema.domain.MovieInfo
 
-object MovieByGenreDiffCallBack : DiffUtil.ItemCallback<MovieInfo>(){
+object FavouriteMovieDiffCallBack : DiffUtil.ItemCallback<MovieInfo>(){
 
     override fun areItemsTheSame(oldItem: MovieInfo, newItem: MovieInfo): Boolean {
         return oldItem.id == newItem.id
