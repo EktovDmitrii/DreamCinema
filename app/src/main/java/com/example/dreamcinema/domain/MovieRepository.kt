@@ -28,7 +28,7 @@ interface MovieRepository {
 
     suspend fun getMovie(movieId: Int): MovieInfo
 
-    fun getMovieList(): LiveData<List<MovieInfo>>
+    fun getMovieList(): List<MovieInfo>
 
     suspend fun deleteMovie(movieInfo: MovieInfo)
 }

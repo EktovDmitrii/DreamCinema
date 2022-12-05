@@ -14,17 +14,21 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class FavouriteViewModel @Inject constructor(
-    private val getMovieUseCase: GetMovieUseCase
+    private val getMovieListUseCase: GetMovieListUseCase
 ): ViewModel() {
 
-    private val _movieLD = MutableLiveData<MovieInfo>()
-    val movieLD: LiveData<MovieInfo>
+    private val _movieLD = MutableLiveData<List<MovieInfo>>()
+    val movieLD: LiveData<List<MovieInfo>>
         get() = _movieLD
 
-    fun getListFavouriteMovies(movieId: Int) {
+    fun getListFavouriteMovies() {
         viewModelScope.launch(Dispatchers.IO) {
-            val movieList = getMovieUseCase(movieId)
-            _movieLD.value = movieList
+            val movieList = getMovieListUseCase()
+            withContext(Dispatchers.Main){
+                let {
+                    _movieLD.value = movieList
+                }
+            }
         }
     }
 

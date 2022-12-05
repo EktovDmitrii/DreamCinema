@@ -19,5 +19,5 @@ interface MovieDao {
     suspend fun getMovie(movieId: Int): MovieDbModel
 
     @Query("SELECT * FROM favourite_movies")
-     fun getMovieList(): LiveData<List<MovieDbModel>>
+     fun getMovieList(): List<MovieDbModel>
 }

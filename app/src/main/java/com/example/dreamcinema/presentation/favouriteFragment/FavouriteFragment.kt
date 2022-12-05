@@ -53,10 +53,16 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[FavouriteViewModel::class.java]
-        viewModel.movieLD.observe(viewLifecycleOwner) {
-            viewModel.getListFavouriteMovies(it.id)
-        }
         setAdapter()
+        setObservers()
+        viewModel.getListFavouriteMovies()
+    }
+
+    private fun setObservers() {
+        viewModel.movieLD.observe(viewLifecycleOwner) {
+            adapter.myData = it
+            adapter.submitList(it)
+        }
     }
 
     override fun onDestroyView() {

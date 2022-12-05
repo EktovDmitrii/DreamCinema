@@ -173,10 +173,9 @@ class MovieRepositoryImpl @Inject constructor(
         return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getMovieList(): LiveData<List<MovieInfo>> = Transformations.map(
-        movieDao.getMovieList()
-    ) {
-        mapper.mapListDbModelToEntity(it)
+    override fun getMovieList(): List<MovieInfo>{
+        val dbModel = movieDao.getMovieList()
+        return mapper.mapListDbModelToEntity(dbModel)
     }
 
     override suspend fun deleteMovie(movieInfo: MovieInfo) {

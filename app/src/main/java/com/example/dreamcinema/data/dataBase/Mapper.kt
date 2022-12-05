@@ -9,7 +9,7 @@ class Mapper @Inject constructor() {
         id = movieInfo.id,
         posterPath = movieInfo.posterPath,
         releaseDate = movieInfo.releaseDate,
-        title = movieInfo.releaseDate,
+        title = movieInfo.title,
         voteAverage = movieInfo.voteAverage,
         video = movieInfo.video,
         overview = movieInfo.overview,
