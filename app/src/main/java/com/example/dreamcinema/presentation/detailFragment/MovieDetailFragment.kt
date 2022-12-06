@@ -83,14 +83,7 @@ class MovieDetailFragment : Fragment() {
     private fun setObservers() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.tvMovieOverview.text = movie.overview
-            binding.btnAddToFavourite.setOnClickListener {
-                Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
-                addToFavourite(movie)
-                Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
-            }
-            if (movie.isInFavourite){
-                setFavouriteButton()
-            }
+            setFavouriteClickListener(movie)
             binding.tvMovieDetailRate.text = movie.voteAverage.toString()
             binding.tvMovieDetailReleaseDate.text = movie.releaseDate
             binding.tvMovieDetailTitle.text = movie.title
@@ -109,18 +102,29 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun addToFavourite(movieDetailInfo: MovieDetailInfo){
-viewModel.addFavouriteMovie(movieDetailInfo)
+    private fun setFavouriteClickListener(movie: MovieDetailInfo) {
+        binding.btnAddToFavourite.setOnClickListener {
+            Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
+            addToFavourite(movie)
+            Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
+        }
+        if (movie.isInFavourite) {
+            setFavouriteButton()
+        }
+    }
+
+    private fun addToFavourite(movieDetailInfo: MovieDetailInfo) {
+        viewModel.addFavouriteMovie(movieDetailInfo)
         if (movieDetailInfo.isInFavourite) {
             Toast.makeText(
                 requireContext(),
-                "Film already in favourite",
+                ALREADY_IN_FAVOURITE,
                 Toast.LENGTH_SHORT
             ).show()
         } else {
             Toast.makeText(
                 requireContext(),
-                "Film was added to favourite",
+                ADD_TO_FAVOURITE,
                 Toast.LENGTH_SHORT
             ).show()
             movieDetailInfo.isInFavourite = true
@@ -129,8 +133,11 @@ viewModel.addFavouriteMovie(movieDetailInfo)
     }
 
     private fun setFavouriteButton() {
-        binding.btnAddToFavourite.text = getText(R.string.in_favourite)
-        binding.btnAddToFavourite.setBackgroundColor(Color.YELLOW)
+        with(binding.btnAddToFavourite) {
+            text = getText(R.string.in_favourite)
+            setBackgroundColor(Color.YELLOW)
+            isEnabled = false
+        }
     }
 
     private fun launchDetailFragment(movieId: Int) {
@@ -145,7 +152,8 @@ viewModel.addFavouriteMovie(movieDetailInfo)
         private const val BASE_URL = "https://image.tmdb.org/t/p/original/"
         private const val MOVIE_ID = "movie_id"
         private const val NO_MOVIE_ID: Int = -1
-
+        private const val ADD_TO_FAVOURITE = "Film was added to favourite"
+        private const val ALREADY_IN_FAVOURITE = "Already in your collection"
 
         fun newInstance(movieId: Int): Fragment {
             return MovieDetailFragment().apply {

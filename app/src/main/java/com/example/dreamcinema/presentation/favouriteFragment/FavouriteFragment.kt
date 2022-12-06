@@ -71,6 +71,11 @@ class FavouriteFragment : Fragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        setObservers()
+    }
+
     private fun setObservers() {
         viewModel.mainMovieLD.observe(viewLifecycleOwner) {
             adapter.myData = it
