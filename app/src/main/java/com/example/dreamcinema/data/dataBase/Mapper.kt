@@ -1,23 +1,23 @@
 package com.example.dreamcinema.data.dataBase
 
-import com.example.dreamcinema.domain.MovieInfo
+import com.example.dreamcinema.domain.MovieDetailInfo
 import javax.inject.Inject
 
 class Mapper @Inject constructor() {
 
-    fun mapEntityToDbModel(movieInfo: MovieInfo): MovieDbModel = MovieDbModel(
-        id = movieInfo.id,
-        posterPath = movieInfo.posterPath,
-        releaseDate = movieInfo.releaseDate,
-        title = movieInfo.title,
-        voteAverage = movieInfo.voteAverage,
-        video = movieInfo.video,
-        overview = movieInfo.overview,
-        backdropPath = movieInfo.backdropPath,
-        genreIds = movieInfo.genreIds
+    fun mapEntityToDbModel(movieDetailInfo: MovieDetailInfo): MovieDbModel = MovieDbModel(
+        id = movieDetailInfo.id,
+        posterPath = movieDetailInfo.posterPath,
+        releaseDate = movieDetailInfo.releaseDate,
+        title = movieDetailInfo.title,
+        voteAverage = movieDetailInfo.voteAverage,
+        video = movieDetailInfo.video,
+        overview = movieDetailInfo.overview,
+        backdropPath = movieDetailInfo.backdropPath,
+        genreIds = movieDetailInfo.genreIds
     )
 
-    fun mapDbModelToEntity(movieDbModel: MovieDbModel): MovieInfo = MovieInfo(
+    fun mapDbModelToEntity(movieDbModel: MovieDbModel): MovieDetailInfo = MovieDetailInfo(
         id = movieDbModel.id,
         posterPath = movieDbModel.posterPath,
         releaseDate = movieDbModel.releaseDate,
@@ -26,7 +26,8 @@ class Mapper @Inject constructor() {
         video = movieDbModel.video,
         overview = movieDbModel.overview,
         backdropPath = movieDbModel.backdropPath,
-        genreIds = movieDbModel.genreIds
+        genreIds = movieDbModel.genreIds,
+        isInFavourite = false
     )
 
     fun mapListDbModelToEntity(list: List<MovieDbModel>) = list.map {

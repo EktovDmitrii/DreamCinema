@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import com.example.dreamcinema.data.dataBase.Mapper
 import com.example.dreamcinema.data.dataBase.MovieDao
 import com.example.dreamcinema.data.network.api.ApiService
+import com.example.dreamcinema.data.network.api.dto.MovieInfoDto
 import com.example.dreamcinema.domain.*
 import javax.inject.Inject
 
@@ -23,9 +24,6 @@ class MovieRepositoryImpl @Inject constructor(
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
-                video = it.video,
-                overview = it.overview,
-                backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
@@ -39,9 +37,6 @@ class MovieRepositoryImpl @Inject constructor(
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
-                video = it.video,
-                overview = it.overview,
-                backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
@@ -55,9 +50,6 @@ class MovieRepositoryImpl @Inject constructor(
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
-                video = it.video,
-                overview = it.overview,
-                backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
@@ -71,9 +63,6 @@ class MovieRepositoryImpl @Inject constructor(
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
-                video = it.video,
-                overview = it.overview,
-                backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
@@ -88,9 +77,11 @@ class MovieRepositoryImpl @Inject constructor(
         return listOf(getNowPlaying, getPopular, getTop, getUpcoming)
     }
 
-    override suspend fun getDetails(movieId: Int): MovieInfo {
+    override suspend fun getDetails(movieId: Int): MovieDetailInfo {
+val favouriteMovie = movieDao.getMovieList()
+               val isInFavourite = favouriteMovie.find { it.id == movieId }!= null
         with(apiService.getDetails(movieId)) {
-            return MovieInfo(
+            return MovieDetailInfo(
                 id = id,
                 posterPath = posterPath,
                 releaseDate = releaseDate,
@@ -99,7 +90,8 @@ class MovieRepositoryImpl @Inject constructor(
                 video = video,
                 overview = overview,
                 backdropPath = backdropPath,
-                genreIds = genreIds
+                genreIds = genreIds,
+                isInFavourite = isInFavourite
             )
         }
     }
@@ -131,9 +123,6 @@ class MovieRepositoryImpl @Inject constructor(
                 releaseDate = it.releaseDate,
                 title = it.title,
                 voteAverage = it.voteAverage,
-                video = it.video,
-                overview = it.overview,
-                backdropPath = it.backdropPath,
                 genreIds = it.genreIds
             )
         }
@@ -148,9 +137,9 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMoviesByGenre(genreId: Int): List<MovieInfo> {
+    override suspend fun getMoviesByGenre(genreId: Int): List<MovieDetailInfo> {
         return apiService.getMoviesByGenre(genreId).movieList.map {
-            MovieInfo(
+            MovieDetailInfo(
                 id = it.id,
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
@@ -159,26 +148,27 @@ class MovieRepositoryImpl @Inject constructor(
                 video = it.video,
                 overview = it.overview,
                 backdropPath = it.backdropPath,
-                genreIds = it.genreIds
+                genreIds = it.genreIds,
+                isInFavourite = false
             )
         }
     }
 
-    override suspend fun addMovie(movieInfo: MovieInfo) {
-        movieDao.addMovie(mapper.mapEntityToDbModel(movieInfo))
+    override suspend fun addMovie(movieDetailInfo: MovieDetailInfo) {
+        movieDao.addMovie(mapper.mapEntityToDbModel(movieDetailInfo))
     }
 
-    override suspend fun getMovie(movieId: Int): MovieInfo {
+    override suspend fun getMovie(movieId: Int): MovieDetailInfo {
         val dbModel = movieDao.getMovie(movieId)
         return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getMovieList(): List<MovieInfo>{
+    override fun getMovieList(): List<MovieDetailInfo>{
         val dbModel = movieDao.getMovieList()
         return mapper.mapListDbModelToEntity(dbModel)
     }
 
-    override suspend fun deleteMovie(movieInfo: MovieInfo) {
-        movieDao.deleteMovie(movieInfo.id)
+    override suspend fun deleteMovie(movieDetailInfo: MovieDetailInfo) {
+        movieDao.deleteMovie(movieDetailInfo.id)
     }
 }

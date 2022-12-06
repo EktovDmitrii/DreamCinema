@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
 class MovieByGenreAdapter @Inject constructor(
 
-): ListAdapter<MovieInfo, MovieByGenreViewHolder>(MovieByGenreDiffCallBack){
+): ListAdapter<MovieDetailInfo, MovieByGenreViewHolder>(MovieByGenreDiffCallBack){
 
-    var myData: List<MovieInfo> = emptyList()
+    var myData: List<MovieDetailInfo> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieByGenreViewHolder {
         val view = LayoutInflater.from(parent.context)

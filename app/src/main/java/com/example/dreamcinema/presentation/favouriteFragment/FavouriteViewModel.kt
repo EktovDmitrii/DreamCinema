@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.useCases.DeleteMovieUseCase
 import com.example.dreamcinema.domain.useCases.GetMovieListUseCase
@@ -18,8 +19,8 @@ class FavouriteViewModel @Inject constructor(
     private val deleteMovieUseCase: DeleteMovieUseCase
 ) : ViewModel() {
 
-    private val _movieLD = MutableLiveData<List<MovieInfo>>()
-    val movieLD: LiveData<List<MovieInfo>>
+    private val _movieLD = MutableLiveData<List<MovieDetailInfo>>()
+    val movieLD: LiveData<List<MovieDetailInfo>>
         get() = _movieLD
 
     fun getListFavouriteMovies() {
@@ -33,9 +34,9 @@ class FavouriteViewModel @Inject constructor(
         }
     }
 
-    fun deleteFromFavourite(movieInfo: MovieInfo) {
+    fun deleteFromFavourite(movieDetailInfo: MovieDetailInfo) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteMovieUseCase(movieInfo)
+            deleteMovieUseCase(movieDetailInfo)
             getListFavouriteMovies()
         }
     }

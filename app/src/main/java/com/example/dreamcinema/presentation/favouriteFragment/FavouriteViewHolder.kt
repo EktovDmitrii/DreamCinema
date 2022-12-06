@@ -4,15 +4,16 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dreamcinema.databinding.MovieInfoBinding
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 
 class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val binding = MovieInfoBinding.bind(itemView)
 
-    fun bind(movieInfo: MovieInfo) {
-        binding.tvFilmName.text = movieInfo.title
-        binding.tvFilmRate.text = movieInfo.voteAverage.toString()
-        Glide.with(itemView).load(BASE_URL + movieInfo.posterPath)
+    fun bind(movieDetailInfo: MovieDetailInfo) {
+        binding.tvFilmName.text = movieDetailInfo.title
+        binding.tvFilmRate.text = movieDetailInfo.voteAverage.toString()
+        Glide.with(itemView).load(BASE_URL + movieDetailInfo.posterPath)
             .into(binding.ivFilmLogo)
     }
 

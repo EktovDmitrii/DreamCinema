@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.Genre
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.useCases.GetGenreUseCase
 import com.example.dreamcinema.domain.useCases.GetMoviesByGenreUseCase
@@ -22,8 +23,8 @@ class GenreViewModel @Inject constructor(
     val genre: LiveData<List<Genre>>
     get() = _genre
 
-    private val _movie = MutableLiveData<List<MovieInfo>>()
-    val movie: LiveData<List<MovieInfo>>
+    private val _movie = MutableLiveData<List<MovieDetailInfo>>()
+    val movie: LiveData<List<MovieDetailInfo>>
     get() = _movie
 
     fun getMoviesByGenre(genreId: Int){

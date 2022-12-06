@@ -14,7 +14,7 @@ interface MovieRepository {
 
     suspend fun getAllMovieListsInfo(): List<MovieList>
 
-    suspend fun getDetails(movieId: Int): MovieInfo
+    suspend fun getDetails(movieId: Int): MovieDetailInfo
 
     suspend fun getMovieCast(movieId: Int): List<MovieCast>
 
@@ -22,13 +22,13 @@ interface MovieRepository {
 
     suspend fun getGenreInfo(): List<Genre>
 
-    suspend fun getMoviesByGenre(genreId: Int): List<MovieInfo>
+    suspend fun getMoviesByGenre(genreId: Int): List<MovieDetailInfo>
 
-    suspend fun addMovie(movieInfo: MovieInfo)
+    suspend fun addMovie(movieDetailInfo: MovieDetailInfo)
 
-    suspend fun getMovie(movieId: Int): MovieInfo
+    suspend fun getMovie(movieId: Int): MovieDetailInfo
 
-    fun getMovieList(): List<MovieInfo>
+    fun getMovieList(): List<MovieDetailInfo>
 
-    suspend fun deleteMovie(movieInfo: MovieInfo)
+    suspend fun deleteMovie(movieDetailInfo: MovieDetailInfo)
 }

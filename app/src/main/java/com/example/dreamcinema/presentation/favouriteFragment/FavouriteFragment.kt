@@ -2,6 +2,7 @@ package com.example.dreamcinema.presentation.favouriteFragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +99,8 @@ class FavouriteFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = adapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteFromFavourite(item)
+                item.isInFavourite = false
+                Log.d("isInFavouriteStatus", "${item.isInFavourite}")
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)

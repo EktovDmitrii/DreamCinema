@@ -1,6 +1,7 @@
 package com.example.dreamcinema.presentation.detailFragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentMovieDetailBinding
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
@@ -52,10 +54,10 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val movieId = getMovieId()
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
+        setObservers()
         viewModel.getDetailsInfo(movieId)
         viewModel.getCastInfo(movieId)
         viewModel.getRecommendedMovies(movieId)
-        setObservers()
         setAdapter()
     }
 
@@ -82,12 +84,12 @@ class MovieDetailFragment : Fragment() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.tvMovieOverview.text = movie.overview
             binding.btnAddToFavourite.setOnClickListener {
+                Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
                 addToFavourite(movie)
-                Toast.makeText(
-                    requireContext(),
-                    "Film was added to favourite",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
+            }
+            if (movie.isInFavourite){
+                setFavouriteButton()
             }
             binding.tvMovieDetailRate.text = movie.voteAverage.toString()
             binding.tvMovieDetailReleaseDate.text = movie.releaseDate
@@ -107,8 +109,28 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun addToFavourite(movieInfo: MovieInfo){
-viewModel.addFavouriteMovie(movieInfo)
+    private fun addToFavourite(movieDetailInfo: MovieDetailInfo){
+viewModel.addFavouriteMovie(movieDetailInfo)
+        if (movieDetailInfo.isInFavourite) {
+            Toast.makeText(
+                requireContext(),
+                "Film already in favourite",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Film was added to favourite",
+                Toast.LENGTH_SHORT
+            ).show()
+            movieDetailInfo.isInFavourite = true
+        }
+        setFavouriteButton()
+    }
+
+    private fun setFavouriteButton() {
+        binding.btnAddToFavourite.text = getText(R.string.in_favourite)
+        binding.btnAddToFavourite.setBackgroundColor(Color.YELLOW)
     }
 
     private fun launchDetailFragment(movieId: Int) {

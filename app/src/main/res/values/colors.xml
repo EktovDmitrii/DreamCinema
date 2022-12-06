@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="indigo"> #4B0082</color>
     <color name="DarkSlateGray">#2F4F4F</color>
+    <color name="gold">#FCD80B</color>
+    <color name="gray">#A7A4A4</color>
+    A7A4A4
 </resources>

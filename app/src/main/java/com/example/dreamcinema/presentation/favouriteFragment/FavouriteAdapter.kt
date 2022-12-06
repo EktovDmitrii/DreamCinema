@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.Genre
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.CourseRvModel
 import javax.inject.Inject
@@ -13,10 +14,9 @@ import javax.inject.Inject
 class FavouriteAdapter @Inject constructor(
     private val courseList: ArrayList<CourseRvModel>,
     private val context: Context?,
-//    val longClickListener: OnMovieLongClickListener
-) : ListAdapter<MovieInfo, FavouriteViewHolder>(FavouriteMovieDiffCallBack) {
+) : ListAdapter<MovieDetailInfo, FavouriteViewHolder>(FavouriteMovieDiffCallBack) {
 
-    var myData: List<MovieInfo> = emptyList()
+    var myData: List<MovieDetailInfo> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.movie_info, parent, false)

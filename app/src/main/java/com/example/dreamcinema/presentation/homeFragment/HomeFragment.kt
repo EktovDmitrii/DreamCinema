@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
             VerticalMovieInfoAdapter(object : HorizontalMovieInfoAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieInfo: MovieInfo) {
                     launchDetailFragment(movieInfo.id)
-                    Log.d("clickChecker", "click sucsessed ${movieInfo.id} ${movieInfo.title}")
+                    Log.d("clickChecker", "click sucsessed ${movieInfo.id} ${movieInfo.title} ")
                 }
             })
         binding.rvFilmInfoList.adapter = adapterVertical
