@@ -34,6 +34,12 @@ class FavouriteViewModel @Inject constructor(
         }
     }
 
+    fun onFilterChange(newText: String){
+val list = _movieLD.value
+        val filteredList = list?.filter { it.title.contains(newText, true) }
+        _movieLD.value = filteredList
+    }
+
     fun deleteFromFavourite(movieDetailInfo: MovieDetailInfo) {
         viewModelScope.launch(Dispatchers.IO) {
             deleteMovieUseCase(movieDetailInfo)

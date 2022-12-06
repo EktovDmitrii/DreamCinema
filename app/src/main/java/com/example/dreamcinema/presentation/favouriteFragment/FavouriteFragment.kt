@@ -58,6 +58,16 @@ class FavouriteFragment : Fragment() {
         viewModel.getListFavouriteMovies()
         setAdapter()
         setObservers()
+        binding.etSearchFavourite.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.onFilterChange(newText ?: "")
+                return true
+            }
+        })
 
     }
 
