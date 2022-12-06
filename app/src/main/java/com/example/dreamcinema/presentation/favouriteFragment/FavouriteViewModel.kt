@@ -1,14 +1,9 @@
 package com.example.dreamcinema.presentation.favouriteFragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.dreamcinema.domain.MovieDetailInfo
-import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.domain.useCases.DeleteMovieUseCase
 import com.example.dreamcinema.domain.useCases.GetMovieListUseCase
-import com.example.dreamcinema.domain.useCases.GetMovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,9 +14,18 @@ class FavouriteViewModel @Inject constructor(
     private val deleteMovieUseCase: DeleteMovieUseCase
 ) : ViewModel() {
 
+    val filteredLd = MutableLiveData<String>()
+
     private val _movieLD = MutableLiveData<List<MovieDetailInfo>>()
     val movieLD: LiveData<List<MovieDetailInfo>>
         get() = _movieLD
+
+    private val _mainMovieLD = MediatorLiveData<List<MovieDetailInfo>>().apply {
+        addSource(_movieLD) { value = onFilterChange() }
+        addSource(filteredLd) { value = onFilterChange() }
+    }
+    val mainMovieLD: MediatorLiveData<List<MovieDetailInfo>>
+        get() = _mainMovieLD
 
     fun getListFavouriteMovies() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,10 +38,9 @@ class FavouriteViewModel @Inject constructor(
         }
     }
 
-    fun onFilterChange(newText: String){
-val list = _movieLD.value
-        val filteredList = list?.filter { it.title.contains(newText, true) }
-        _movieLD.value = filteredList
+    fun onFilterChange(): List<MovieDetailInfo>? {
+        val filterText = filteredLd.value ?: ""
+        return _movieLD.value?.filter { it.title.contains(filterText, true) }
     }
 
     fun deleteFromFavourite(movieDetailInfo: MovieDetailInfo) {

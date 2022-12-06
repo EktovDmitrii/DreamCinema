@@ -63,8 +63,8 @@ class FavouriteFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.onFilterChange(newText ?: "")
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.filteredLd.value = newText
                 return true
             }
         })
@@ -72,7 +72,7 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.movieLD.observe(viewLifecycleOwner) {
+        viewModel.mainMovieLD.observe(viewLifecycleOwner) {
             adapter.myData = it
             adapter.submitList(it)
         }
