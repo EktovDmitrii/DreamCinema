@@ -64,7 +64,7 @@ class FavouriteFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.filteredLd.value = newText
+                viewModel.filteredLD.value = newText
                 return true
             }
         })

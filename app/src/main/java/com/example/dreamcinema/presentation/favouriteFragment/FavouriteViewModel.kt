@@ -14,15 +14,15 @@ class FavouriteViewModel @Inject constructor(
     private val deleteMovieUseCase: DeleteMovieUseCase
 ) : ViewModel() {
 
-    val filteredLd = MutableLiveData<String>()
+    private val  _filteredLD = MutableLiveData<String>()
+    val filteredLD: MutableLiveData<String>
+    get() = _filteredLD
 
-    private val _movieLD = MutableLiveData<List<MovieDetailInfo>>()
-    val movieLD: LiveData<List<MovieDetailInfo>>
-        get() = _movieLD
+    private val movieLD = MutableLiveData<List<MovieDetailInfo>>()
 
     private val _mainMovieLD = MediatorLiveData<List<MovieDetailInfo>>().apply {
-        addSource(_movieLD) { value = onFilterChange() }
-        addSource(filteredLd) { value = onFilterChange() }
+        addSource(movieLD) { value = onFilterChange() }
+        addSource(_filteredLD) { value = onFilterChange() }
     }
     val mainMovieLD: MediatorLiveData<List<MovieDetailInfo>>
         get() = _mainMovieLD
@@ -32,15 +32,15 @@ class FavouriteViewModel @Inject constructor(
             val movieList = getMovieListUseCase()
             withContext(Dispatchers.Main) {
                 let {
-                    _movieLD.value = movieList
+                    movieLD.value = movieList
                 }
             }
         }
     }
 
     fun onFilterChange(): List<MovieDetailInfo>? {
-        val filterText = filteredLd.value ?: ""
-        return _movieLD.value?.filter { it.title.contains(filterText, true) }
+        val filterText = _filteredLD.value ?: ""
+        return movieLD.value?.filter { it.title.contains(filterText, true) }
     }
 
     fun deleteFromFavourite(movieDetailInfo: MovieDetailInfo) {

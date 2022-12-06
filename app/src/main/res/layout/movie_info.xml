@@ -39,7 +39,7 @@
             android:layout_margin="5dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxWidth="200dp"
+            android:maxWidth="190dp"
             android:maxLines="2"
             android:singleLine="false"
             android:textColor="@color/white"
