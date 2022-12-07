@@ -11,34 +11,36 @@
         android:id="@+id/cv_container_favourite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_favourite_movies">
 
-    <SearchView
-        android:id="@+id/et_search_favourite"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/edit_text_search"
-        android:drawableLeft="@drawable/ic_search"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Find your favourite movie"/>
+        <SearchView
+            android:id="@+id/et_search_favourite"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Find your favourite movie" />
 
 
     </androidx.cardview.widget.CardView>
-
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favourite_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
+        android:paddingBottom="70dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_container_favourite"
         tools:listitem="@layout/movie_info" />
 
 

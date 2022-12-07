@@ -68,14 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Avatar"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxWidth="200dp"
-            android:maxLines="2"
-            android:singleLine="false"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            style="@style/textInCards"
             />
 
 
@@ -96,9 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="2020"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            style="@style/textInCards"
             />
 
 
@@ -119,9 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="8,52342424242234522345"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            style="@style/textInCards"
             />
 
 
@@ -153,11 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/film_cast"
-        android:layout_margin="15dp"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        style="@style/movieDetailRecyclerLabels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_movie_overview"
@@ -180,11 +165,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/recommended"
-        android:layout_margin="15dp"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        style="@style/movieDetailRecyclerLabels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_cast_info" />
