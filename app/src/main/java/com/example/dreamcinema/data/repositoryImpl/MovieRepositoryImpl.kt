@@ -78,8 +78,8 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDetails(movieId: Int): MovieDetailInfo {
-val favouriteMovie = movieDao.getMovieList()
-               val isInFavourite = favouriteMovie.find { it.id == movieId }!= null
+        val favouriteMovie = movieDao.getMovieList()
+        val isInFavourite = favouriteMovie.find { it.id == movieId } != null
         with(apiService.getDetails(movieId)) {
             return MovieDetailInfo(
                 id = id,
@@ -154,11 +154,20 @@ val favouriteMovie = movieDao.getMovieList()
         }
     }
 
+    override suspend fun getVideos(movieId: Int): List<MovieVideos> {
+        return apiService.getVideos(movieId).results.map {
+            MovieVideos(
+                id = it.id,
+                key = it.key
+            )
+        }
+    }
+
     override suspend fun addMovie(movieDetailInfo: MovieDetailInfo) {
         movieDao.addMovie(mapper.mapEntityToDbModel(movieDetailInfo))
     }
 
-    override fun getMovieList(): List<MovieDetailInfo>{
+    override fun getMovieList(): List<MovieDetailInfo> {
         val dbModel = movieDao.getMovieList()
         return mapper.mapListDbModelToEntity(dbModel)
     }

@@ -8,10 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.domain.useCases.AddMovieUseCase
-import com.example.dreamcinema.domain.useCases.GetDetailInfoUseCase
-import com.example.dreamcinema.domain.useCases.GetMovieCastUseCase
-import com.example.dreamcinema.domain.useCases.GetRecommendedMoviesUseCase
+import com.example.dreamcinema.domain.MovieVideos
+import com.example.dreamcinema.domain.useCases.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -22,12 +20,17 @@ class MovieDetailViewModel @Inject constructor(
     private val getDetailInfoUseCase: GetDetailInfoUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
     private val getRecommendedMoviesUseCase: GetRecommendedMoviesUseCase,
-    private val addMovieUseCase: AddMovieUseCase
+    private val addMovieUseCase: AddMovieUseCase,
+    private val getVideosUseCase: GetVideosUseCase
 ) : ViewModel() {
 
     private val _movie = MutableLiveData<MovieDetailInfo>()
     val movie: LiveData<MovieDetailInfo>
         get() = _movie
+
+    private val _video = MutableLiveData<List<MovieVideos>>()
+    val video: LiveData<List<MovieVideos>>
+        get() = _video
 
     private val _favouriteMovie = MutableLiveData<MovieDetailInfo>()
     val favouriteMovie: LiveData<MovieDetailInfo>
@@ -70,10 +73,18 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
-    fun addFavouriteMovie(movieDetailInfo: MovieDetailInfo){
+    fun addFavouriteMovie(movieDetailInfo: MovieDetailInfo) {
         viewModelScope.launch(Dispatchers.IO) {
-           addMovieUseCase(movieDetailInfo)
+            addMovieUseCase(movieDetailInfo)
+        }
+    }
 
+    fun getVideo(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            val trailers = getVideosUseCase(id)
+            withContext(Dispatchers.Main){
+                _video.value = trailers
+            }
         }
     }
 

@@ -17,6 +17,12 @@ import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
+import com.example.dreamcinema.utils.YouTubeLoader
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -30,6 +36,8 @@ class MovieDetailFragment : Fragment() {
     private val component by lazy {
         (requireActivity().application as MovieApp).component
     }
+
+    lateinit var youTubeLoader: YouTubeLoader
 
     private lateinit var viewModel: MovieDetailViewModel
 
@@ -48,13 +56,16 @@ class MovieDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = getMovieId()
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
+        youTubeLoader = YouTubeLoader(lifecycle, binding.youTubeView)
         setObservers()
+        viewModel.getVideo(movieId)
         viewModel.getDetailsInfo(movieId)
         viewModel.getCastInfo(movieId)
         viewModel.getRecommendedMovies(movieId)
@@ -99,6 +110,10 @@ class MovieDetailFragment : Fragment() {
         viewModel.recommendation.observe(viewLifecycleOwner) {
             recommendationAdapter.myData = it
             recommendationAdapter.submitList(it)
+        }
+        viewModel.video.observe(viewLifecycleOwner){
+youTubeLoader.loadVideo("")
+//            Log.d("VideoKey", "${it.key}")
         }
     }
 
@@ -154,6 +169,8 @@ class MovieDetailFragment : Fragment() {
         private const val NO_MOVIE_ID: Int = -1
         private const val ADD_TO_FAVOURITE = "Film was added to favourite"
         private const val ALREADY_IN_FAVOURITE = "Already in your collection"
+        private const val YOU_TUBE_API_KEY = "AIzaSyBnSI1FSYi-hEB8eANfuYe8_hRhAko3syM"
+
 
         fun newInstance(movieId: Int): Fragment {
             return MovieDetailFragment().apply {
