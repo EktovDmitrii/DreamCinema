@@ -158,11 +158,6 @@ val favouriteMovie = movieDao.getMovieList()
         movieDao.addMovie(mapper.mapEntityToDbModel(movieDetailInfo))
     }
 
-    override suspend fun getMovie(movieId: Int): MovieDetailInfo {
-        val dbModel = movieDao.getMovie(movieId)
-        return mapper.mapDbModelToEntity(dbModel)
-    }
-
     override fun getMovieList(): List<MovieDetailInfo>{
         val dbModel = movieDao.getMovieList()
         return mapper.mapListDbModelToEntity(dbModel)

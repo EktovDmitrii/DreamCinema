@@ -61,7 +61,7 @@ class GenreFragment : Fragment() {
     }
 
     private fun setGridAdapter() {
-        courseRv = binding.rvCastInfo
+        courseRv = binding.rvGenreList
         courseList = ArrayList()
         val layoutManager = GridLayoutManager(context, 2)
         courseRv.layoutManager = layoutManager
