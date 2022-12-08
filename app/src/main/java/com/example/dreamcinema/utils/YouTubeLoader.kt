@@ -1,34 +1,45 @@
 package com.example.dreamcinema.utils
 
+import android.view.View
 import android.widget.ImageView
+import androidx.annotation.NonNull
 import androidx.lifecycle.Lifecycle
+import com.example.dreamcinema.R
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import java.lang.RuntimeException
 
 class YouTubeLoader(
-val lifecycle: Lifecycle,
-val youTubePlayerView: YouTubePlayerView
-){
-    fun loadVideo(url: String?){
+    val lifecycle: Lifecycle,
+    val youTubePlayerView: YouTubePlayerView,
+    val errorImageView: ImageView
+) {
+
+    var counter = 0
+
+    fun loadVideo(listUrl: List<String>) {
         lifecycle.addObserver(youTubePlayerView)
-        youTubePlayerView.getPlayerUiController()
-        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                if (url != null) {
-                    youTubePlayer.loadVideo(url, 0f)
-                } else{
-                    throw RuntimeException("Can't find video")
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
+                if (listUrl.isNotEmpty()) {
+                    youTubePlayer.loadVideo(listUrl[counter], 0f)
                 }
             }
 
-            override fun onStateChange(
+            override fun onError(
                 youTubePlayer: YouTubePlayer,
-                state: PlayerConstants.PlayerState
+                error: PlayerConstants.PlayerError,
             ) {
-                super.onStateChange(youTubePlayer, state)
+                super.onError(youTubePlayer, error)
+                counter++
+                if (counter <= listUrl.lastIndex) {
+                    loadVideo(listUrl)
+                } else {
+                    youTubePlayerView.visibility = View.GONE
+                    errorImageView.setImageResource(R.drawable.ic_null_person)
+                    errorImageView.visibility = View.VISIBLE
+                }
             }
         })
     }

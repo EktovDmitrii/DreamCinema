@@ -28,8 +28,8 @@ class MovieDetailViewModel @Inject constructor(
     val movie: LiveData<MovieDetailInfo>
         get() = _movie
 
-    private val _video = MutableLiveData<List<MovieVideos>>()
-    val video: LiveData<List<MovieVideos>>
+    private val _video = MutableLiveData<List<String>>()
+    val video: LiveData<List<String>>
         get() = _video
 
     private val _favouriteMovie = MutableLiveData<MovieDetailInfo>()
@@ -81,9 +81,9 @@ class MovieDetailViewModel @Inject constructor(
 
     fun getVideo(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            val trailers = getVideosUseCase(id)
-            withContext(Dispatchers.Main){
-                _video.value = trailers
+                val trailers = getVideosUseCase(id)
+                withContext(Dispatchers.Main){
+                    _video.value = trailers.map { it.key ?: "" }
             }
         }
     }

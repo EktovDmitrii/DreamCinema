@@ -18,11 +18,9 @@ import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
 import com.example.dreamcinema.utils.YouTubeLoader
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
+import com.example.dreamcinema.utils.addOnCloseListener
+import com.example.dreamcinema.utils.pause
+import com.example.dreamcinema.utils.play
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -63,13 +61,14 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val movieId = getMovieId()
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
-        youTubeLoader = YouTubeLoader(lifecycle, binding.youTubeView)
-        setObservers()
+        youTubeLoader = YouTubeLoader(lifecycle, binding.youtubePlayerView, binding.youtubeView)
         viewModel.getVideo(movieId)
+        setObservers()
         viewModel.getDetailsInfo(movieId)
         viewModel.getCastInfo(movieId)
         viewModel.getRecommendedMovies(movieId)
         setAdapter()
+
     }
 
     private fun setAdapter() {
@@ -89,19 +88,19 @@ class MovieDetailFragment : Fragment() {
 
     private fun getMovieId(): Int {
         return requireArguments().getInt(MOVIE_ID, NO_MOVIE_ID)
+
+
     }
 
     private fun setObservers() {
-        viewModel.movie.observe(viewLifecycleOwner) { movie ->
-            binding.tvMovieOverview.text = movie.overview
-            setFavouriteClickListener(movie)
-            binding.tvMovieDetailRate.text = movie.voteAverage.toString()
-            binding.tvMovieDetailReleaseDate.text = movie.releaseDate
-            binding.tvMovieDetailTitle.text = movie.title
-            Glide.with(this).load(BASE_URL + movie.posterPath)
-                .into(binding.ivMovieDetailPoster)
-            Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
-                .into(binding.ivBackgroundPoster)
+        viewModel.video.observe(viewLifecycleOwner) {it
+            youTubeLoader.loadVideo(it)
+        }
+        viewModel.movie.observe(viewLifecycleOwner) {
+            setAllBinds(it)
+            stopPlayer()
+            setFavouriteClickListener(it)
+
         }
         viewModel.cast.observe(viewLifecycleOwner) {
             castadapter.myData = it
@@ -111,10 +110,18 @@ class MovieDetailFragment : Fragment() {
             recommendationAdapter.myData = it
             recommendationAdapter.submitList(it)
         }
-        viewModel.video.observe(viewLifecycleOwner){
-youTubeLoader.loadVideo("")
-//            Log.d("VideoKey", "${it.key}")
-        }
+    }
+
+    private fun setAllBinds(movie: MovieDetailInfo) {
+        binding.tvMovieOverview.text = movie.overview
+        binding.tvMovieDetailRate.text = movie.voteAverage.toString()
+        binding.tvMovieDetailReleaseDate.text = movie.releaseDate
+        binding.tvMovieDetailTitle.text = movie.title
+        Glide.with(this).load(BASE_URL + movie.posterPath)
+            .into(binding.ivMovieDetailPoster)
+        Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
+            .into(binding.ivBackgroundPoster)
+
     }
 
     private fun setFavouriteClickListener(movie: MovieDetailInfo) {
@@ -147,6 +154,19 @@ youTubeLoader.loadVideo("")
         setFavouriteButton()
     }
 
+
+    private fun stopPlayer() {
+        binding.appbar.addOnCloseListener(
+            onClose = {
+                Log.d("VideoClick", "CLICKED")
+                binding.youtubePlayerView.pause()
+            },
+            onOpen = {
+                Log.d("VideoClick", "CLICKED")
+                binding.youtubePlayerView.play()
+            })
+    }
+
     private fun setFavouriteButton() {
         with(binding.btnAddToFavourite) {
             text = getText(R.string.in_favourite)
@@ -169,7 +189,6 @@ youTubeLoader.loadVideo("")
         private const val NO_MOVIE_ID: Int = -1
         private const val ADD_TO_FAVOURITE = "Film was added to favourite"
         private const val ALREADY_IN_FAVOURITE = "Already in your collection"
-        private const val YOU_TUBE_API_KEY = "AIzaSyBnSI1FSYi-hEB8eANfuYe8_hRhAko3syM"
 
 
         fun newInstance(movieId: Int): Fragment {
