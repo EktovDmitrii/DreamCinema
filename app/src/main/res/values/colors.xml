@@ -11,5 +11,5 @@
     <color name="DarkSlateGray">#2F4F4F</color>
     <color name="gold">#FCD80B</color>
     <color name="gray">#A7A4A4</color>
-    A7A4A4
+    <color name="colorShadowedBackground">#22AAAAAA</color>
 </resources>
