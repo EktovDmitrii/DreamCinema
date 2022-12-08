@@ -100,6 +100,6 @@ class GenreFragment : Fragment() {
     companion object {
 
         fun newInstance() =
-            FavouriteFragment()
+            GenreFragment()
     }
 }

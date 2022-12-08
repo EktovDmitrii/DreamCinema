@@ -88,8 +88,6 @@ class MovieDetailFragment : Fragment() {
 
     private fun getMovieId(): Int {
         return requireArguments().getInt(MOVIE_ID, NO_MOVIE_ID)
-
-
     }
 
     private fun setObservers() {

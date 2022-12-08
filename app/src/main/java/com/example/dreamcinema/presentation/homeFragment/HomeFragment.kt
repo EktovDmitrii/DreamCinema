@@ -72,6 +72,13 @@ class HomeFragment : Fragment() {
             adapterVertical.myData = listMovie
             adapterVertical.submitList(listMovie)
         }
+        viewModel.isLoadingLifeData.observe(viewLifecycleOwner){
+            if (it == true){
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
     private fun launchDetailFragment(movieId: Int) {

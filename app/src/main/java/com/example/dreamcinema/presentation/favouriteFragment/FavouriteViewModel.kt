@@ -7,6 +7,7 @@ import com.example.dreamcinema.domain.useCases.GetMovieListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.RuntimeException
 import javax.inject.Inject
 
 class FavouriteViewModel @Inject constructor(
@@ -14,9 +15,9 @@ class FavouriteViewModel @Inject constructor(
     private val deleteMovieUseCase: DeleteMovieUseCase
 ) : ViewModel() {
 
-    private val  _filteredLD = MutableLiveData<String>()
+    private val _filteredLD = MutableLiveData<String>()
     val filteredLD: MutableLiveData<String>
-    get() = _filteredLD
+        get() = _filteredLD
 
     private val movieLD = MutableLiveData<List<MovieDetailInfo>>()
 
@@ -31,8 +32,10 @@ class FavouriteViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val movieList = getMovieListUseCase()
             withContext(Dispatchers.Main) {
-                let {
+                if (movieList != null) {
                     movieLD.value = movieList
+                } else {
+                    throw RuntimeException("ListOfFavourite equals null")
                 }
             }
         }

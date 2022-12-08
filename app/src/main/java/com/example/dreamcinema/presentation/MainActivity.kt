@@ -1,6 +1,7 @@
 package com.example.dreamcinema.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.dreamcinema.R
@@ -33,20 +34,22 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val genreFragment = GenreFragment()
         val favouriteFragment = FavouriteFragment()
-        launchHomeFragment(homeFragment)
+        launchRightFragment(homeFragment)
+
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    launchHomeFragment(homeFragment)
+                    launchRightFragment(homeFragment)
                     true
+
                 }
                 R.id.favourite -> {
-                    launchHomeFragment(favouriteFragment)
+                    launchRightFragment(favouriteFragment)
                     true
                 }
                 R.id.genre -> {
-                    launchHomeFragment(genreFragment)
+                    launchRightFragment(genreFragment)
                     true
                 }
                 else ->
@@ -60,7 +63,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun launchHomeFragment(fragment: Fragment) {
+    private fun launchRightFragment(fragment: Fragment) {
+        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.home_fragment_container, fragment)
                 .addToBackStack(null)

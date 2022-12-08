@@ -32,10 +32,6 @@ class MovieDetailViewModel @Inject constructor(
     val video: LiveData<List<String>>
         get() = _video
 
-    private val _favouriteMovie = MutableLiveData<MovieDetailInfo>()
-    val favouriteMovie: LiveData<MovieDetailInfo>
-        get() = _favouriteMovie
-
     private val _cast = MutableLiveData<List<MovieCast>>()
     val cast: LiveData<List<MovieCast>>
         get() = _cast

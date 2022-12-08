@@ -11,10 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentFavouriteBinding
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.presentation.CourseRvModel
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import javax.inject.Inject
 
 
@@ -58,7 +61,8 @@ class FavouriteFragment : Fragment() {
         viewModel.getListFavouriteMovies()
         setAdapter()
         setObservers()
-        binding.etSearchFavourite.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.etSearchFavourite.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -76,16 +80,19 @@ class FavouriteFragment : Fragment() {
         setObservers()
     }
 
-    private fun setObservers() {
-        viewModel.mainMovieLD.observe(viewLifecycleOwner) {
-            adapter.myData = it
-            adapter.submitList(it)
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun setObservers() {
+        viewModel.mainMovieLD.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.myData = it
+                adapter.submitList(it)
+            }
+        }
     }
 
     private fun setAdapter() {
@@ -93,7 +100,12 @@ class FavouriteFragment : Fragment() {
         courseList = ArrayList()
         val layoutManager = GridLayoutManager(context, 2)
         courseRv.layoutManager = layoutManager
-        adapter = FavouriteAdapter(courseList, context)
+        adapter =
+            FavouriteAdapter(courseList, context, object : FavouriteAdapter.OnMovieClickListener {
+                override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
+                    launchDetailFragment(movieDetailInfo.id)
+                }
+            })
         courseRv.adapter = adapter
         setupSwipeListener(binding.rvFavouriteMovies)
     }
@@ -122,9 +134,17 @@ class FavouriteFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(rvFavouriteMovie)
     }
 
-    companion object {
+    private fun launchDetailFragment(movieId: Int) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
+            .addToBackStack(null)
+            .commit()
+    }
 
-        fun newInstance() =
-            FavouriteFragment()
+    companion object {
+        private const val MOVIE_ID = "movie_id"
+        private const val NO_MOVIE_ID: Int = -1
+
+        fun newInstance() = FavouriteFragment()
     }
 }
