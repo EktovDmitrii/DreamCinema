@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="170dp"
-    android:layout_height="145dp"
-    android:layout_margin="7dp"
+    android:layout_width="@dimen/genre_big_width"
+    android:layout_height="@dimen/genre_big_height"
+    android:layout_margin="@dimen/genre_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toools="http://schemas.android.com/tools"
     app:cardBackgroundColor="@color/DarkSlateGray">
@@ -14,10 +14,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_genre_image_container"
-            android:layout_width="160dp"
-            android:layout_height="115dp"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="10dp"
+            android:layout_width="@dimen/genre_small_width"
+            android:layout_height="@dimen/genre_small_height"
+            android:layout_margin="@dimen/small_margin"
+            app:cardCornerRadius="@dimen/corner_radius_or_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_genre_name">

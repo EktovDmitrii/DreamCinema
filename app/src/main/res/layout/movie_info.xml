@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/small_margin"
     app:cardBackgroundColor="@color/DarkSlateGray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +13,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/iv_film_logo_container"
-            android:layout_width="200dp"
-            android:layout_height="250dp"
+            android:layout_width="@dimen/small_card_height"
+            android:layout_height="@dimen/medium_image_height"
             app:cardBackgroundColor="@color/DarkSlateGray"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/corner_radius_or_margin"
             app:layout_constraintBottom_toTopOf="@id/tv_film_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/tv_film_rate_label"
             style="@style/movieInfoRating"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/small_margin"
             android:text="@string/film_rating"
             app:layout_constraintEnd_toEndOf="@id/guideline_middle"
             app:layout_constraintTop_toBottomOf="@id/tv_film_name" />
@@ -50,9 +50,9 @@
         <TextView
             android:id="@+id/tv_film_rate"
             style="@style/movieInfoRating"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
             app:layout_constraintTop_toBottomOf="@id/tv_film_name"
             tools:text="8,5" />

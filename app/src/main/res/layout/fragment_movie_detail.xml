@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/background_container"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/big_image_height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -32,12 +32,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/poster_container"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="@dimen/small_card_width"
+            android:layout_height="@dimen/small_card_height"
+            android:layout_marginStart="@dimen/corner_radius_or_margin"
+            android:layout_marginTop="@dimen/big_margin"
             app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="@dimen/corner_radius_or_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -55,7 +55,7 @@
             android:id="@+id/cv_title_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/small_margin"
             app:cardBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/cv_date_container"
             app:layout_constraintStart_toEndOf="@id/poster_container">
@@ -74,7 +74,7 @@
             android:id="@+id/cv_date_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/small_margin"
             app:cardBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/cv_rate_container"
             app:layout_constraintStart_toEndOf="@id/poster_container">
@@ -93,7 +93,7 @@
             android:id="@+id/cv_rate_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/small_margin"
             app:cardBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@id/background_container"
             app:layout_constraintStart_toEndOf="@id/poster_container">
@@ -111,8 +111,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_margin="15dp"
-            android:layout_height="200dp"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_height="@dimen/small_card_height"
             android:fitsSystemWindows="true"
             app:layout_constraintBottom_toTopOf="@id/btn_add_to_favourite"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/youtube_player_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/small_card_height"
                 app:autoPlay="false"
                 app:enableLiveVideoUi="true"
                 app:showFullScreenButton="false" />
@@ -130,7 +130,7 @@
             <ImageView
                 android:id="@+id/youtube_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/small_card_height"
                 android:visibility="gone" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -139,7 +139,7 @@
             android:id="@+id/btn_add_to_favourite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/big_margin"
             android:text="@string/add_to_favourite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@
             android:id="@+id/tv_movie_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/medium_margin"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +171,7 @@
             android:id="@+id/rv_cast_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/recycler_margin"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +193,7 @@
             android:id="@+id/rv_recommended_movies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/recycler_margin"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

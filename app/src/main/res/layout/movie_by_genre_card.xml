@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="10dp"
+    android:layout_height="@dimen/small_card_height"
+    android:layout_margin="@dimen/small_margin"
+    app:cardCornerRadius="@dimen/corner_radius_or_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardBackgroundColor="@color/DarkSlateGray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="@dimen/small_card_height">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_movie_poster"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/tv_movie_rate"
             style="@style/movieByGenre"
-            android:textSize="40sp"
+            android:textSize="@dimen/huge_text_size"
             tools:text="10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

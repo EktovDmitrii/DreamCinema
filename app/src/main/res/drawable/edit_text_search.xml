@@ -12,10 +12,10 @@
             <corners
                 android:radius="1dp" />
             <padding
-                android:bottom="10dp"
-                android:left="10dp"
-                android:right="10dp"
-                android:top="10dp" />
+                android:bottom="@dimen/corner_radius_or_margin"
+                android:left="@dimen/corner_radius_or_margin"
+                android:right="@dimen/corner_radius_or_margin"
+                android:top="@dimen/corner_radius_or_margin" />
         </shape>
     </item>
 
