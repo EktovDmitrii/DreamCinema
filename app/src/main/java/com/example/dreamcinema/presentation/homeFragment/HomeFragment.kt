@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
     private fun launchDetailFragment(movieId: Int) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
-            .addToBackStack(null)
+            .addToBackStack("detail")
             .commit()
     }
 

@@ -31,7 +31,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_search_favourite"
-        tools:listitem="@layout/movie_info" />
+        tools:listitem="@layout/movie_favourite_info" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

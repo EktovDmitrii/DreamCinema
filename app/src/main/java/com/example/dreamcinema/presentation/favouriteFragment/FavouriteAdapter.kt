@@ -19,7 +19,7 @@ class FavouriteAdapter @Inject constructor(
     var myData: List<MovieDetailInfo> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.movie_info, parent, false)
+            .inflate(R.layout.movie_favourite_info, parent, false)
         return FavouriteViewHolder(
             view
         )

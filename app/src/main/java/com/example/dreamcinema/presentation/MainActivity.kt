@@ -3,8 +3,10 @@ package com.example.dreamcinema.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.ActivityMainBinding
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
 import com.example.dreamcinema.presentation.genreFragment.GenreFragment
 import com.example.dreamcinema.presentation.homeFragment.HomeFragment
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+    private val movieDetailFragment = MovieDetailFragment()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -27,25 +30,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         component.inject(this)
-
+supportFragmentManager.addOnBackStackChangedListener {
+    if (supportFragmentManager.backStackEntryCount == 0)
+        finish()
+}
         val homeFragment = HomeFragment()
         val genreFragment = GenreFragment()
         val favouriteFragment = FavouriteFragment()
-        launchRightFragment(homeFragment, "home")
+        launchRightFragment(homeFragment)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    launchRightFragment(homeFragment, "home")
+                    launchRightFragment(homeFragment)
 
                     false
                 }
                 R.id.favourite -> {
-                    launchRightFragment(favouriteFragment, "favor")
+                    launchRightFragment(favouriteFragment)
                     false
                 }
                 R.id.genre -> {
-                    launchRightFragment(genreFragment, "genre")
+                    launchRightFragment(genreFragment,)
                     false
                 }
                 else ->
@@ -58,12 +64,12 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun launchRightFragment(fragment: Fragment, name: String) {
-        supportFragmentManager.popBackStack("home", 0)
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.home_fragment_container, fragment)
-            addToBackStack(name)
-                .commit()
+    private fun launchRightFragment(fragment: Fragment) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.home_fragment_container, fragment)
+                addToBackStack(null)
+                    .commit()
+
         }
     }
 }

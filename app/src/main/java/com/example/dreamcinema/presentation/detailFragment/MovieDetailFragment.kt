@@ -23,6 +23,7 @@ import com.example.dreamcinema.utils.pause
 import com.example.dreamcinema.utils.play
 import javax.inject.Inject
 
+
 class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding: FragmentMovieDetailBinding
