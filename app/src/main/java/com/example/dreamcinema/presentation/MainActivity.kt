@@ -28,27 +28,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         component.inject(this)
 
-
         val homeFragment = HomeFragment()
         val genreFragment = GenreFragment()
         val favouriteFragment = FavouriteFragment()
-        launchRightFragment(homeFragment)
-
-
+        launchRightFragment(homeFragment, "home")
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    launchRightFragment(homeFragment)
+                    launchRightFragment(homeFragment, "home")
 
                     false
                 }
                 R.id.favourite -> {
-                    launchRightFragment(favouriteFragment)
+                    launchRightFragment(favouriteFragment, "favor")
                     false
                 }
                 R.id.genre -> {
-                    launchRightFragment(genreFragment)
+                    launchRightFragment(genreFragment, "genre")
                     false
                 }
                 else ->
@@ -61,16 +58,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
-
-//    override fun onBackPressed() {
-//        supportFragmentManager.popBackStack("home", 0)
-//    }
-
-    private fun launchRightFragment(fragment: Fragment) {
-        supportFragmentManager.popBackStack()
+    private fun launchRightFragment(fragment: Fragment, name: String) {
+        supportFragmentManager.popBackStack("home", 0)
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.home_fragment_container, fragment)
+            addToBackStack(name)
                 .commit()
         }
     }
