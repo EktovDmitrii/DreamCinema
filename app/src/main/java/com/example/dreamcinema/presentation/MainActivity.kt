@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.bottomNavigationView.setBackgroundColor(
-            resources.getColor(R.color.colorShadowedBackground)
+            resources.getColor(R.color.shadowDeepIndigo)
         )
     }
 
