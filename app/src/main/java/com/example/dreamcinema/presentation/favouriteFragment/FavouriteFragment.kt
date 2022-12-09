@@ -62,7 +62,7 @@ class FavouriteFragment : Fragment() {
         setAdapter()
         setObservers()
         binding.etSearchFavourite.setOnQueryTextListener(object :
-            android.widget.SearchView.OnQueryTextListener {
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -72,6 +72,7 @@ class FavouriteFragment : Fragment() {
                 return true
             }
         })
+
 
     }
 

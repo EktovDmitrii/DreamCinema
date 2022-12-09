@@ -7,29 +7,19 @@
     android:background="@drawable/thema2"
     tools:context="presentation.favouriteFragment.FavouriteFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_container_favourite"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/et_search_favourite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_height="@dimen/search_height"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/edit_text_search"
+        app:searchIcon="@drawable/ic_search"
+        app:closeIcon="@drawable/ic_baseline_close_24"
+        android:hint="Find your favourite movie"
+        app:layout_constraintBottom_toTopOf="@id/rv_favourite_movies"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rv_favourite_movies">
-
-        <SearchView
-            android:id="@+id/et_search_favourite"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/search_height"
-            android:layout_margin="@dimen/small_margin"
-            android:background="@drawable/edit_text_search"
-            android:drawableLeft="@drawable/ic_search"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Find your favourite movie" />
-
-
-    </androidx.cardview.widget.CardView>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favourite_movies"
@@ -40,7 +30,7 @@
         android:paddingBottom="@dimen/recycler_padding"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_container_favourite"
+        app:layout_constraintTop_toBottomOf="@id/et_search_favourite"
         tools:listitem="@layout/movie_info" />
 
 
