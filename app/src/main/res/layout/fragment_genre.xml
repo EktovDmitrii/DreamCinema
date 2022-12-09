@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/DarkSlateGray"
+    android:background="@drawable/thema2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.genreFragment.GenreFragment">
 
@@ -17,4 +17,4 @@
         app:layout_constraintTop_toBottomOf="parent"
         tools:listitem="@layout/genre_card" />
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>
