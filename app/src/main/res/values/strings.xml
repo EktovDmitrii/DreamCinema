@@ -8,6 +8,8 @@
     <string name="film_cast">Film cast </string>
     <string name="recommended">Recommended for you </string>
     <string name="in_favourite">In Your favourite list</string>
+    <string name="detail_label">Movie details </string>
+
 
 
 </resources>

@@ -14,7 +14,7 @@
     <dimen name="recycler_padding">70dp</dimen>
     <dimen name="big_text_size">30sp</dimen>
     <dimen name="big_image_height">300dp</dimen>
-    <dimen name="huge_margin">100dp</dimen>
+    <dimen name="huge_margin">110dp</dimen>
     <dimen name="big_margin">20dp</dimen>
     <dimen name="recycler_margin">25dp</dimen>
     <dimen name="genre_big_width">170dp</dimen>

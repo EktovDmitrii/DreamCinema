@@ -92,7 +92,8 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.video.observe(viewLifecycleOwner) {it
+        viewModel.video.observe(viewLifecycleOwner) {
+            it
             youTubeLoader.loadVideo(it)
         }
         viewModel.movie.observe(viewLifecycleOwner) {
@@ -120,7 +121,14 @@ class MovieDetailFragment : Fragment() {
             .into(binding.ivMovieDetailPoster)
         Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
             .into(binding.ivBackgroundPoster)
+        binding.backImageView.setOnClickListener {
+            pressBack()
+        }
 
+    }
+
+    private fun pressBack() {
+        requireActivity().onBackPressed()
     }
 
     private fun setFavouriteClickListener(movie: MovieDetailInfo) {
