@@ -17,7 +17,7 @@ class MoviesByGenreFragment : Fragment() {
 
     private var _binding: FragmentMoviesByGenreBinding? = null
     private val binding: FragmentMoviesByGenreBinding
-    get() = _binding ?: throw RuntimeException("FragmentMoviesByGenreBinding is null")
+        get() = _binding ?: throw RuntimeException("FragmentMoviesByGenreBinding is null")
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -48,7 +48,7 @@ class MoviesByGenreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[GenreViewModel::class.java]
-       val genreID = getGenreId()
+        val genreID = getGenreId()
         viewModel.getMoviesByGenre(genreID)
         setObservers()
         setAdapter()
@@ -60,20 +60,27 @@ class MoviesByGenreFragment : Fragment() {
         _binding = null
     }
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         adapter = MovieByGenreAdapter()
-       binding.rvMoviesByGenre.adapter = adapter
+        binding.rvMoviesByGenre.adapter = adapter
     }
 
-    private fun setObservers(){
-        viewModel.movie.observe(viewLifecycleOwner){
+    private fun setObservers() {
+        viewModel.movie.observe(viewLifecycleOwner) {
             adapter.myData = it
             adapter.submitList(it)
+            binding.backImageView.setOnClickListener {
+                pressBack()
+            }
         }
     }
 
     private fun getGenreId(): Int {
         return requireArguments().getInt(GENRE_ID, NO_GENRE_ID)
+    }
+
+    private fun pressBack() {
+        requireActivity().onBackPressed()
     }
 
     companion object {
@@ -85,7 +92,7 @@ class MoviesByGenreFragment : Fragment() {
         fun newInstance(genreId: Int) =
             MoviesByGenreFragment().apply {
                 arguments = Bundle().apply {
-                   putInt(GENRE_ID, genreId)
+                    putInt(GENRE_ID, genreId)
                 }
             }
     }

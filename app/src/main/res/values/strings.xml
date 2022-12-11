@@ -9,7 +9,5 @@
     <string name="recommended">Recommended for you </string>
     <string name="in_favourite">In Your favourite list</string>
     <string name="detail_label">Movie details </string>
-
-
-
+    <string name="movies_by_genres_label">Movies by genres </string>
 </resources>
