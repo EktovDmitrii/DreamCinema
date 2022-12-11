@@ -117,8 +117,13 @@ class MovieDetailFragment : Fragment() {
         binding.tvMovieDetailRate.text = movie.voteAverage.toString()
         binding.tvMovieDetailReleaseDate.text = movie.releaseDate
         binding.tvMovieDetailTitle.text = movie.title
-        Glide.with(this).load(BASE_URL + movie.posterPath)
-            .into(binding.ivMovieDetailPoster)
+        if (movie.posterPath != null) {
+            Glide.with(this).load(BASE_URL + movie.posterPath)
+                .into(binding.ivMovieDetailPoster)
+        } else {
+            Glide.with(this).load(R.drawable.ic_baseline_image_not_supported_24)
+                .into(binding.ivMovieDetailPoster)
+        }
         Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
             .into(binding.ivBackgroundPoster)
         binding.backImageView.setOnClickListener {

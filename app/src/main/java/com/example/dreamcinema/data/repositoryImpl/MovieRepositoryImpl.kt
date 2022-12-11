@@ -137,8 +137,8 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMoviesByGenre(genreId: Int): List<MovieDetailInfo> {
-        return apiService.getMoviesByGenre(genreId).movieList.map {
+    override suspend fun getMoviesByGenre( page: Int, genreId: Int): List<MovieDetailInfo> {
+        return apiService.getMoviesByGenre(page, genreId).movieList.map {
             MovieDetailInfo(
                 id = it.id,
                 posterPath = it.posterPath,

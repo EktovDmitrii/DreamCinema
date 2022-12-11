@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 data class MovieDbModel(
    @PrimaryKey
     val id: Int,
-    val posterPath: String,
+    val posterPath: String?,
     val releaseDate: String,
     val title: String,
     val voteAverage: Double,

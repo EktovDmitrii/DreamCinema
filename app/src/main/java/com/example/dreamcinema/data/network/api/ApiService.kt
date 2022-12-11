@@ -66,6 +66,7 @@ interface ApiService {
 
     @GET("3/discover/movie")
     suspend fun getMoviesByGenre(
+        @Query(PAGE) page: Int,
         @Query(GENRE_ID) genreId: Int,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY_VALUE,
         @Query(QUERY_PARAM_LANGUAGE) language: String = LANGUAGE
@@ -81,6 +82,7 @@ interface ApiService {
     companion object {
 
         private const val QUERY_PARAM_API_KEY = "api_key"
+        private const val PAGE = "page"
         private const val QUERY_PARAM_LANGUAGE = "language"
         private const val LANGUAGE = "eng-ENG"
         private const val API_KEY_VALUE = "139c985f543aaf9db3e818b31275a4c1"

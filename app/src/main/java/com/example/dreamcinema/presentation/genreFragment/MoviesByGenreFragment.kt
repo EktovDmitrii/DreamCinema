@@ -7,13 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentMoviesByGenreBinding
 import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
 import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 
 class MoviesByGenreFragment : Fragment() {
@@ -27,7 +32,13 @@ class MoviesByGenreFragment : Fragment() {
 
     private lateinit var viewModel: GenreViewModel
 
-    private lateinit var adapter: MovieByGenreAdapter
+    private var adapter = MovieByGenreAdapter(
+        object : MovieByGenreAdapter.OnMovieClickListener {
+            override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
+                launchDetailFragment(movieDetailInfo.id)
+            }
+        }
+    )
 
 
     private val component by lazy {
@@ -52,9 +63,18 @@ class MoviesByGenreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[GenreViewModel::class.java]
         val genreID = getGenreId()
-        viewModel.getMoviesByGenre(genreID)
-        setObservers()
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.getMoviesByGenre(genreID).collectLatest {
+                adapter.submitData(lifecycle, it)
+                binding.backImageView.setOnClickListener {
+                    pressBack()
+                }
+            }
+        }
+
+//        setObservers()
         setAdapter()
+
 
     }
 
@@ -64,23 +84,18 @@ class MoviesByGenreFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = MovieByGenreAdapter(object : MovieByGenreAdapter.OnMovieClickListener{
-            override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
-                launchDetailFragment(movieDetailInfo.id)
-            }
-        })
         binding.rvMoviesByGenre.adapter = adapter
     }
-
-    private fun setObservers() {
-        viewModel.movie.observe(viewLifecycleOwner) {
-            adapter.myData = it
-            adapter.submitList(it)
-            binding.backImageView.setOnClickListener {
-                pressBack()
-            }
-        }
-    }
+//
+//    private fun setObservers() {
+//        viewModel.movie.observe(viewLifecycleOwner) {
+//            adapter.myData = it
+//            adapter.submitList(it)
+//            binding.backImageView.setOnClickListener {
+//                pressBack()
+//            }
+//        }
+//    }
 
     private fun getGenreId(): Int {
         return requireArguments().getInt(GENRE_ID, NO_GENRE_ID)

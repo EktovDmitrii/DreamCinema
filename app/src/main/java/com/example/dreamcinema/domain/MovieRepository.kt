@@ -22,7 +22,7 @@ interface MovieRepository {
 
     suspend fun getGenreInfo(): List<Genre>
 
-    suspend fun getMoviesByGenre(genreId: Int): List<MovieDetailInfo>
+    suspend fun getMoviesByGenre(page: Int, genreId: Int): List<MovieDetailInfo>
 
     suspend fun addMovie(movieDetailInfo: MovieDetailInfo)
 

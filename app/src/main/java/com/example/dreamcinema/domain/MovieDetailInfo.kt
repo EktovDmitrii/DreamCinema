@@ -7,7 +7,7 @@ import javax.inject.Inject
 @Parcelize
 data class MovieDetailInfo @Inject constructor(
     var id: Int,
-    var posterPath: String,
+    var posterPath: String?,
     var releaseDate: String,
     var title: String,
     var voteAverage: Double,
