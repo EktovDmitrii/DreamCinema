@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentMoviesByGenreBinding
+import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import javax.inject.Inject
 
 
@@ -61,7 +64,11 @@ class MoviesByGenreFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = MovieByGenreAdapter()
+        adapter = MovieByGenreAdapter(object : MovieByGenreAdapter.OnMovieClickListener{
+            override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
+                launchDetailFragment(movieDetailInfo.id)
+            }
+        })
         binding.rvMoviesByGenre.adapter = adapter
     }
 
@@ -82,6 +89,14 @@ class MoviesByGenreFragment : Fragment() {
     private fun pressBack() {
         requireActivity().onBackPressed()
     }
+
+    private fun launchDetailFragment(movieId: Int) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, MovieDetailFragment.newInstance(movieId))
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     companion object {
 

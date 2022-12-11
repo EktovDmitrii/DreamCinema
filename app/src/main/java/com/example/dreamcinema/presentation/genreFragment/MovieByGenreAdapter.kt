@@ -9,7 +9,7 @@ import com.example.dreamcinema.domain.MovieInfo
 import javax.inject.Inject
 
 class MovieByGenreAdapter @Inject constructor(
-
+val listener: OnMovieClickListener
 ): ListAdapter<MovieDetailInfo, MovieByGenreViewHolder>(MovieByGenreDiffCallBack){
 
     var myData: List<MovieDetailInfo> = emptyList()
@@ -23,9 +23,16 @@ class MovieByGenreAdapter @Inject constructor(
     override fun onBindViewHolder(holder: MovieByGenreViewHolder, position: Int) {
       val movie = myData[position]
         holder.bind(movie)
+        holder.itemView.setOnClickListener {
+            listener.onMovieClick(movie)
+        }
     }
 
     override fun getItemCount(): Int {
         return myData.size
+    }
+
+    interface OnMovieClickListener {
+        fun onMovieClick(movieDetailInfo: MovieDetailInfo)
     }
 }
