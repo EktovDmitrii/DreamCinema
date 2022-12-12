@@ -1,8 +1,6 @@
 package com.example.dreamcinema.domain
 
 import android.os.Parcelable
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
@@ -13,5 +11,5 @@ data class MovieInfo @Inject constructor(
     var releaseDate: String,
     var title: String,
     var voteAverage: Double,
-    val genreIds : List<Int>?,
-): Parcelable
+    val genreIds: List<Int>?,
+) : Parcelable

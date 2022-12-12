@@ -11,7 +11,6 @@ class MovieCastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val binding: CastCardBinding = CastCardBinding.bind(itemView)
 
-
     fun bind(movieCast: MovieCast) {
         binding.tvActorName.text = movieCast.name
         binding.tvCharacter.text = movieCast.character
@@ -23,7 +22,6 @@ class MovieCastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .into(binding.ivActorImage)
         }
     }
-
 
     companion object {
         private const val BASE_URL = "https://image.tmdb.org/t/p/original/"

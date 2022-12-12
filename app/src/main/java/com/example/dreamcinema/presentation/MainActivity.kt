@@ -3,7 +3,6 @@ package com.example.dreamcinema.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.ActivityMainBinding
 import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
@@ -30,20 +29,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         component.inject(this)
-supportFragmentManager.addOnBackStackChangedListener {
-    if (supportFragmentManager.backStackEntryCount == 0)
-        finish()
-}
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0)
+                finish()
+        }
         val homeFragment = HomeFragment()
         val genreFragment = GenreFragment()
         val favouriteFragment = FavouriteFragment()
         launchRightFragment(homeFragment)
+        setBottomNavMenu(homeFragment, favouriteFragment, genreFragment)
+    }
 
+    private fun setBottomNavMenu(
+        homeFragment: HomeFragment,
+        favouriteFragment: FavouriteFragment,
+        genreFragment: GenreFragment
+    ) {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
                     launchRightFragment(homeFragment)
-
                     false
                 }
                 R.id.favourite -> {
@@ -51,12 +56,11 @@ supportFragmentManager.addOnBackStackChangedListener {
                     false
                 }
                 R.id.genre -> {
-                    launchRightFragment(genreFragment,)
+                    launchRightFragment(genreFragment)
                     false
                 }
                 else ->
                     throw RuntimeException("")
-
             }
         }
         binding.bottomNavigationView.setBackgroundColor(
@@ -65,10 +69,10 @@ supportFragmentManager.addOnBackStackChangedListener {
     }
 
     private fun launchRightFragment(fragment: Fragment) {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.home_fragment_container, fragment)
-                addToBackStack(null)
-                    .commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.home_fragment_container, fragment)
+            addToBackStack(null)
+                .commit()
 
         }
     }

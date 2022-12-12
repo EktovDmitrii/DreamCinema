@@ -38,7 +38,6 @@ class GenreViewModel @Inject constructor(
         private const val INITIAL_LOAD_SIZE = 40
     }
 
-
     fun getMoviesByGenre(genreId: Int): Flow<PagingData<MovieDetailInfo>> {
         val config = PagingConfig(
             pageSize = PAGE_SIZE,

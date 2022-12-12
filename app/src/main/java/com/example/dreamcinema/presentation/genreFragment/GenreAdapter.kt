@@ -13,7 +13,7 @@ class GenreAdapter @Inject constructor(
     private val courseList: ArrayList<CourseRvModel>,
     private val context: Context?,
     val listener: OnGenreClickListener
-):ListAdapter<Genre, GenreViewHolder>(MovieGenreDiffCallback) {
+) : ListAdapter<Genre, GenreViewHolder>(MovieGenreDiffCallback) {
 
     var myData: List<Genre> = emptyList()
 

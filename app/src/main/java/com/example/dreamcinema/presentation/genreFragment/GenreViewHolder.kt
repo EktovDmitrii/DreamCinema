@@ -7,19 +7,19 @@ import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.GenreCardBinding
 import com.example.dreamcinema.domain.Genre
 
-class GenreViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class GenreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val binding = GenreCardBinding.bind(itemView)
 
-    fun bind(genre: Genre){
+    fun bind(genre: Genre) {
         binding.tvGenreName.text = genre.name
         setGenreImage(genre)
     }
 
     private fun setGenreImage(genre: Genre) {
         if (genre.name == "Action")
-        Glide.with(itemView).load(R.mipmap.ic_channel_foreground)
-            .into(binding.ivGenreView)
+            Glide.with(itemView).load(R.mipmap.ic_channel_foreground)
+                .into(binding.ivGenreView)
         if (genre.name == "Adventure")
             Glide.with(itemView).load(R.mipmap.ic_adventure_foreground)
                 .into(binding.ivGenreView)
@@ -74,7 +74,5 @@ class GenreViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         if (genre.name == "Western")
             Glide.with(itemView).load(R.mipmap.ic_western_foreground)
                 .into(binding.ivGenreView)
-
-
     }
 }

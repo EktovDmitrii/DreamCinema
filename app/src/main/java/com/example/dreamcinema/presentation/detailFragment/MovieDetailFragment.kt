@@ -3,7 +3,6 @@ package com.example.dreamcinema.presentation.detailFragment
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +16,11 @@ import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
-import com.example.dreamcinema.utils.YouTubeLoader
-import com.example.dreamcinema.utils.addOnCloseListener
-import com.example.dreamcinema.utils.pause
-import com.example.dreamcinema.utils.play
+import com.example.dreamcinema.utils.*
 import javax.inject.Inject
 
-
 class MovieDetailFragment : Fragment() {
+
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding: FragmentMovieDetailBinding
         get() = _binding ?: throw RuntimeException("FragmentMovieDetailBinding is null")
@@ -69,7 +65,6 @@ class MovieDetailFragment : Fragment() {
         viewModel.getCastInfo(movieId)
         viewModel.getRecommendedMovies(movieId)
         setAdapter()
-
     }
 
     private fun setAdapter() {
@@ -79,7 +74,6 @@ class MovieDetailFragment : Fragment() {
             object : MovieRecommendationAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieInfo: MovieInfo) {
                     launchDetailFragment(movieInfo.id)
-                    Log.d("clickChecker", "click sucsessed ${movieInfo.id} ${movieInfo.title}")
                 }
             }
         )
@@ -92,44 +86,54 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.video.observe(viewLifecycleOwner) {
+        subscribe(viewModel.video) {
             it
             youTubeLoader.loadVideo(it)
         }
-        viewModel.movie.observe(viewLifecycleOwner) {
+
+        subscribe(viewModel.movie) {
             setAllBinds(it)
             stopPlayer()
             setFavouriteClickListener(it)
-
         }
-        viewModel.cast.observe(viewLifecycleOwner) {
+
+        subscribe(viewModel.cast) {
             castadapter.myData = it
             castadapter.submitList(it)
         }
-        viewModel.recommendation.observe(viewLifecycleOwner) {
+
+        subscribe(viewModel.recommendation) {
             recommendationAdapter.myData = it
             recommendationAdapter.submitList(it)
         }
     }
 
     private fun setAllBinds(movie: MovieDetailInfo) {
-        binding.tvMovieOverview.text = movie.overview
-        binding.tvMovieDetailRate.text = movie.voteAverage.toString()
-        binding.tvMovieDetailReleaseDate.text = movie.releaseDate
-        binding.tvMovieDetailTitle.text = movie.title
-        if (movie.posterPath != null) {
-            Glide.with(this).load(BASE_URL + movie.posterPath)
-                .into(binding.ivMovieDetailPoster)
-        } else {
-            Glide.with(this).load(R.drawable.ic_baseline_image_not_supported_24)
-                .into(binding.ivMovieDetailPoster)
+        with(movie) {
+            binding.tvMovieOverview.text = overview
+            binding.tvMovieDetailRate.text = voteAverage.toString()
+            binding.tvMovieDetailReleaseDate.text = releaseDate
+            binding.tvMovieDetailTitle.text = title
+            if (posterPath != null) {
+                Glide.with(this@MovieDetailFragment).load(BASE_URL + posterPath)
+                    .into(binding.ivMovieDetailPoster)
+            } else {
+                Glide.with(this@MovieDetailFragment)
+                    .load(R.drawable.ic_baseline_image_not_supported_24)
+                    .into(binding.ivMovieDetailPoster)
+            }
+            if (backdropPath != null) {
+                Glide.with(this@MovieDetailFragment).load(BASE_POSTER_URL + backdropPath)
+                    .into(binding.ivBackgroundPoster)
+            } else {
+                Glide.with(this@MovieDetailFragment)
+                    .load(R.drawable.ic_baseline_image_not_supported_24)
+                    .into(binding.ivBackgroundPoster)
+            }
+            binding.backImageView.setOnClickListener {
+                pressBack()
+            }
         }
-        Glide.with(this).load(BASE_POSTER_URL + movie.backdropPath)
-            .into(binding.ivBackgroundPoster)
-        binding.backImageView.setOnClickListener {
-            pressBack()
-        }
-
     }
 
     private fun pressBack() {
@@ -138,9 +142,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun setFavouriteClickListener(movie: MovieDetailInfo) {
         binding.btnAddToFavourite.setOnClickListener {
-            Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
             addToFavourite(movie)
-            Log.d("isInFavouriteStatus", "${movie.isInFavourite}")
         }
         if (movie.isInFavourite) {
             setFavouriteButton()
@@ -170,11 +172,9 @@ class MovieDetailFragment : Fragment() {
     private fun stopPlayer() {
         binding.appbar.addOnCloseListener(
             onClose = {
-                Log.d("VideoClick", "CLICKED")
                 binding.youtubePlayerView.pause()
             },
             onOpen = {
-                Log.d("VideoClick", "CLICKED")
                 binding.youtubePlayerView.play()
             })
     }
@@ -201,7 +201,6 @@ class MovieDetailFragment : Fragment() {
         private const val NO_MOVIE_ID: Int = -1
         private const val ADD_TO_FAVOURITE = "Film was added to favourite"
         private const val ALREADY_IN_FAVOURITE = "Already in your collection"
-
 
         fun newInstance(movieId: Int): Fragment {
             return MovieDetailFragment().apply {

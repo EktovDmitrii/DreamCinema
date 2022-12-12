@@ -17,10 +17,5 @@ class ListConvertor {
         val gson = Gson()
         val type = object : TypeToken<List<Int>>() {}.type
         return gson.fromJson(value, type)
-
-
-//            return value.split(",").map {it.toInt()  }
-//        }
-
     }
 }

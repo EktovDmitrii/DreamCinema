@@ -1,10 +1,10 @@
 package com.example.dreamcinema.di
 
 import androidx.lifecycle.ViewModel
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailViewModel
 import com.example.dreamcinema.presentation.favouriteFragment.FavouriteViewModel
 import com.example.dreamcinema.presentation.genreFragment.GenreViewModel
 import com.example.dreamcinema.presentation.homeFragment.HomeViewModel
-import com.example.dreamcinema.presentation.detailFragment.MovieDetailViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

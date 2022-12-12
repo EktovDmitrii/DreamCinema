@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class MovieCastList(
     val id: Int,
     val cast: List<MovieCast>
-): Parcelable
+) : Parcelable

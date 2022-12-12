@@ -17,7 +17,7 @@ class Mapper @Inject constructor() {
         genreIds = movieDetailInfo.genreIds
     )
 
-    fun mapDbModelToEntity(movieDbModel: MovieDbModel): MovieDetailInfo = MovieDetailInfo(
+    private fun mapDbModelToEntity(movieDbModel: MovieDbModel): MovieDetailInfo = MovieDetailInfo(
         id = movieDbModel.id,
         posterPath = movieDbModel.posterPath,
         releaseDate = movieDbModel.releaseDate,

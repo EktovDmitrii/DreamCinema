@@ -20,7 +20,6 @@ class MovieByGenresSource @Inject constructor(
         val totalPages = 5
         val prevKey = if (page == 1) null else page - 1
         val nextKey = if (page < totalPages) page + 1 else null
-
         return LoadResult.Page(response, prevKey, nextKey)
     }
 }

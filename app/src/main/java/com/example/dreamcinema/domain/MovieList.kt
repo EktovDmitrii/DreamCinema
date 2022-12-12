@@ -8,4 +8,4 @@ import javax.inject.Inject
 data class MovieList @Inject constructor(
     val listTitle: String,
     val movieList: List<MovieInfo>
-):Parcelable
+) : Parcelable

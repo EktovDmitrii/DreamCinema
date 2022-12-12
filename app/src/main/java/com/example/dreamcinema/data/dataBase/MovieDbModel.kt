@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 
 @Entity(tableName = "favourite_movies")
 data class MovieDbModel(
-   @PrimaryKey
+    @PrimaryKey
     val id: Int,
     val posterPath: String?,
     val releaseDate: String,
@@ -15,6 +15,6 @@ data class MovieDbModel(
     val video: Boolean,
     val overview: String,
     val backdropPath: String?,
-   @TypeConverters(ListConvertor::class)
+    @TypeConverters(ListConvertor::class)
     val genreIds: List<Int>?
 )

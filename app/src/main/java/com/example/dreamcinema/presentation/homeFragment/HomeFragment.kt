@@ -2,7 +2,6 @@ package com.example.dreamcinema.presentation.homeFragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,10 @@ import com.example.dreamcinema.R
 import com.example.dreamcinema.databinding.FragmentHomeBinding
 import com.example.dreamcinema.domain.MovieInfo
 import com.example.dreamcinema.presentation.MovieApp
-import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import com.example.dreamcinema.presentation.ViewModelFactory
+import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
+import com.example.dreamcinema.utils.subscribe
 import javax.inject.Inject
-
 
 class HomeFragment : Fragment() {
 
@@ -54,7 +53,6 @@ class HomeFragment : Fragment() {
             VerticalMovieInfoAdapter(object : HorizontalMovieInfoAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieInfo: MovieInfo) {
                     launchDetailFragment(movieInfo.id)
-                    Log.d("clickChecker", "click sucsessed ${movieInfo.id} ${movieInfo.title} ")
                 }
             })
         binding.rvFilmInfoList.adapter = adapterVertical
@@ -68,12 +66,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.listMovie.observe(viewLifecycleOwner) { listMovie ->
-            adapterVertical.myData = listMovie
-            adapterVertical.submitList(listMovie)
+        subscribe(viewModel.listMovie) { it ->
+            adapterVertical.myData = it
+            adapterVertical.submitList(it)
         }
-        viewModel.isLoadingLifeData.observe(viewLifecycleOwner){
-            if (it == true){
+        subscribe(viewModel.isLoadingLifeData) {
+            if (it) {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE

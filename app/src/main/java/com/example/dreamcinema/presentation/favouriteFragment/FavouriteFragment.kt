@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,8 +19,8 @@ import com.example.dreamcinema.presentation.CourseRvModel
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
 import com.example.dreamcinema.presentation.detailFragment.MovieDetailFragment
+import com.example.dreamcinema.utils.subscribe
 import javax.inject.Inject
-
 
 class FavouriteFragment : Fragment() {
 
@@ -61,8 +62,12 @@ class FavouriteFragment : Fragment() {
         viewModel.getListFavouriteMovies()
         setAdapter()
         setObservers()
+        setSearchView()
+    }
+
+    private fun setSearchView() {
         binding.etSearchFavourite.setOnQueryTextListener(object :
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -72,8 +77,6 @@ class FavouriteFragment : Fragment() {
                 return true
             }
         })
-
-
     }
 
     override fun onStart() {
@@ -88,7 +91,7 @@ class FavouriteFragment : Fragment() {
 
 
     private fun setObservers() {
-        viewModel.mainMovieLD.observe(viewLifecycleOwner) {
+        subscribe(viewModel.mainMovieLD) {
             if (it != null) {
                 adapter.myData = it
                 adapter.submitList(it)
@@ -143,9 +146,6 @@ class FavouriteFragment : Fragment() {
     }
 
     companion object {
-        private const val MOVIE_ID = "movie_id"
-        private const val NO_MOVIE_ID: Int = -1
-
         fun newInstance() = FavouriteFragment()
     }
 }

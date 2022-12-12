@@ -1,6 +1,5 @@
 package com.example.dreamcinema.presentation.detailFragment
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.MovieCast
 import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.domain.MovieVideos
 import com.example.dreamcinema.domain.useCases.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -40,7 +38,6 @@ class MovieDetailViewModel @Inject constructor(
     val recommendation: LiveData<List<MovieInfo>>
         get() = _recommendation
 
-
     fun getDetailsInfo(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val movieDetail = getDetailInfoUseCase(id)
@@ -55,7 +52,6 @@ class MovieDetailViewModel @Inject constructor(
             val castInfo = getMovieCastUseCase(id)
             withContext((Dispatchers.Main)) {
                 _cast.value = castInfo
-                Log.d("CastCheck", "${castInfo.toString()}")
             }
         }
     }
@@ -75,11 +71,11 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
-    fun getVideo(id: Int){
+    fun getVideo(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-                val trailers = getVideosUseCase(id)
-                withContext(Dispatchers.Main){
-                    _video.value = trailers.map { it.key ?: "" }
+            val trailers = getVideosUseCase(id)
+            withContext(Dispatchers.Main) {
+                _video.value = trailers.map { it.key ?: "" }
             }
         }
     }
@@ -88,6 +84,4 @@ class MovieDetailViewModel @Inject constructor(
         super.onCleared()
         viewModelScope.cancel()
     }
-
-
 }

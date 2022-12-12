@@ -2,10 +2,10 @@ package com.example.dreamcinema.presentation.genreFragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.dreamcinema.R
@@ -18,8 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
 
 class MoviesByGenreFragment : Fragment() {
 
@@ -40,7 +38,6 @@ class MoviesByGenreFragment : Fragment() {
         }
     )
 
-
     private val component by lazy {
         (requireActivity().application as MovieApp).component
     }
@@ -49,7 +46,6 @@ class MoviesByGenreFragment : Fragment() {
         super.onAttach(context)
         component.inject(this)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,10 +67,7 @@ class MoviesByGenreFragment : Fragment() {
                 }
             }
         }
-
-//        setObservers()
         setAdapter()
-
 
     }
 
@@ -86,16 +79,6 @@ class MoviesByGenreFragment : Fragment() {
     private fun setAdapter() {
         binding.rvMoviesByGenre.adapter = adapter
     }
-//
-//    private fun setObservers() {
-//        viewModel.movie.observe(viewLifecycleOwner) {
-//            adapter.myData = it
-//            adapter.submitList(it)
-//            binding.backImageView.setOnClickListener {
-//                pressBack()
-//            }
-//        }
-//    }
 
     private fun getGenreId(): Int {
         return requireArguments().getInt(GENRE_ID, NO_GENRE_ID)

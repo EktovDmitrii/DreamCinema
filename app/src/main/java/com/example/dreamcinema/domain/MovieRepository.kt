@@ -1,7 +1,5 @@
 package com.example.dreamcinema.domain
 
-import androidx.lifecycle.LiveData
-
 interface MovieRepository {
 
     suspend fun getTopMovieInfoList(): List<MovieInfo>

@@ -15,7 +15,7 @@ import com.example.dreamcinema.domain.Genre
 import com.example.dreamcinema.presentation.CourseRvModel
 import com.example.dreamcinema.presentation.MovieApp
 import com.example.dreamcinema.presentation.ViewModelFactory
-import com.example.dreamcinema.presentation.favouriteFragment.FavouriteFragment
+import com.example.dreamcinema.utils.subscribe
 import javax.inject.Inject
 
 class GenreFragment : Fragment() {
@@ -91,14 +91,13 @@ class GenreFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.genre.observe(viewLifecycleOwner) {
+        subscribe(viewModel.genre) {
             adapter.myData = it
             adapter.submitList(it)
         }
     }
 
     companion object {
-
         fun newInstance() =
             GenreFragment()
     }

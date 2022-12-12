@@ -18,11 +18,11 @@ class HomeViewModel @Inject constructor(
 
     private val _isLoadingLifeData = MutableLiveData<Boolean>()
     val isLoadingLifeData: LiveData<Boolean>
-    get() = _isLoadingLifeData
+        get() = _isLoadingLifeData
 
     private val _listMovie = MutableLiveData<List<MovieList>>()
     val listMovie: LiveData<List<MovieList>>
-    get() = _listMovie
+        get() = _listMovie
 
     fun getAllMovieList() {
         _isLoadingLifeData.value = true

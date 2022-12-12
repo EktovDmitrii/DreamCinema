@@ -1,11 +1,8 @@
 package com.example.dreamcinema.data.repositoryImpl
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.dreamcinema.data.dataBase.Mapper
 import com.example.dreamcinema.data.dataBase.MovieDao
 import com.example.dreamcinema.data.network.api.ApiService
-import com.example.dreamcinema.data.network.api.dto.MovieInfoDto
 import com.example.dreamcinema.domain.*
 import javax.inject.Inject
 
@@ -14,7 +11,6 @@ class MovieRepositoryImpl @Inject constructor(
     private val mapper: Mapper,
     private val movieDao: MovieDao
 ) : MovieRepository {
-
 
     override suspend fun getTopMovieInfoList(): List<MovieInfo> {
         return apiService.getTopMoviesInfo().movieList.map { it ->
@@ -67,7 +63,6 @@ class MovieRepositoryImpl @Inject constructor(
             )
         }
     }
-
 
     override suspend fun getAllMovieListsInfo(): List<MovieList> {
         val getTop = MovieList("Top rated movies", getTopMovieInfoList())
@@ -137,7 +132,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMoviesByGenre( page: Int, genreId: Int): List<MovieDetailInfo> {
+    override suspend fun getMoviesByGenre(page: Int, genreId: Int): List<MovieDetailInfo> {
         return apiService.getMoviesByGenre(page, genreId).movieList.map {
             MovieDetailInfo(
                 id = it.id,

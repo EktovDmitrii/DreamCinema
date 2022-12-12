@@ -8,11 +8,9 @@ import com.example.dreamcinema.domain.MovieCast
 import javax.inject.Inject
 
 class MovieCastAdapter @Inject constructor(
-
-): ListAdapter<MovieCast, MovieCastViewHolder>(MovieCastDiffCallback){
+) : ListAdapter<MovieCast, MovieCastViewHolder>(MovieCastDiffCallback) {
 
     var myData: List<MovieCast> = listOf()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieCastViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,7 +19,7 @@ class MovieCastAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: MovieCastViewHolder, position: Int) {
-val actors = myData[position]
+        val actors = myData[position]
         holder.bind(actors)
     }
 

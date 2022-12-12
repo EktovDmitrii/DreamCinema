@@ -11,9 +11,9 @@ data class MovieDetailInfo @Inject constructor(
     var releaseDate: String,
     var title: String,
     var voteAverage: Double,
-    val video : Boolean,
-    val overview : String,
-    val backdropPath : String?,
-    val genreIds : List<Int>?,
+    val video: Boolean,
+    val overview: String,
+    val backdropPath: String?,
+    val genreIds: List<Int>?,
     var isInFavourite: Boolean
-): Parcelable
+) : Parcelable

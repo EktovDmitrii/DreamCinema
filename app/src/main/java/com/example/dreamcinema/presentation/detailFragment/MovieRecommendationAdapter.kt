@@ -3,10 +3,8 @@ package com.example.dreamcinema.presentation.detailFragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dreamcinema.R
 import com.example.dreamcinema.domain.MovieInfo
-import com.example.dreamcinema.presentation.adapter.MovieRecommendedDiffCallback
 import javax.inject.Inject
 
 class MovieRecommendationAdapter @Inject constructor(
@@ -14,7 +12,6 @@ class MovieRecommendationAdapter @Inject constructor(
 ) : ListAdapter<MovieInfo, MovieRecommendationViewHolder>(MovieRecommendedDiffCallback) {
 
     var myData: List<MovieInfo> = listOf()
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

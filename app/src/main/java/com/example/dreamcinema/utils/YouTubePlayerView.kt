@@ -26,7 +26,6 @@ fun YouTubePlayerView.play() {
 fun AppBarLayout.addOnCloseListener(onClose: () -> Unit, onOpen: () -> Unit) {
     addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
         appBarLayout?.let {
-            Log.d("VideoClick", "CLICKED")
             if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0)
                 onClose()
             else {

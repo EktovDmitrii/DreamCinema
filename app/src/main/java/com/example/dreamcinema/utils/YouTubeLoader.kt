@@ -16,14 +16,19 @@ class YouTubeLoader(
     val errorImageView: ImageView
 ) {
 
-    var counter = 0
+    companion object {
+        private const val START_COUNTER = 0
+        private const val START_SECONDS = 0f
+    }
+
+    var counter = START_COUNTER
 
     fun loadVideo(listUrl: List<String>) {
         lifecycle.addObserver(youTubePlayerView)
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
                 if (listUrl.isNotEmpty()) {
-                    youTubePlayer.loadVideo(listUrl[counter], 0f)
+                    youTubePlayer.loadVideo(listUrl[counter], START_SECONDS)
                 }
             }
 

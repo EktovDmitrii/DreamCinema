@@ -1,13 +1,15 @@
 package com.example.dreamcinema.presentation.favouriteFragment
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.dreamcinema.domain.MovieDetailInfo
 import com.example.dreamcinema.domain.useCases.DeleteMovieUseCase
 import com.example.dreamcinema.domain.useCases.GetMovieListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.RuntimeException
 import javax.inject.Inject
 
 class FavouriteViewModel @Inject constructor(
@@ -32,11 +34,7 @@ class FavouriteViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val movieList = getMovieListUseCase()
             withContext(Dispatchers.Main) {
-                if (movieList != null) {
-                    movieLD.value = movieList
-                } else {
-                    throw RuntimeException("ListOfFavourite equals null")
-                }
+                movieLD.value = movieList
             }
         }
     }
