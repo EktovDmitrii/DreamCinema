@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thema2"
+    tools:context="presentation.favouriteFragment.FavouriteFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/et_search_favourite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_height"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/edit_text_search"
+        app:searchIcon="@drawable/ic_search"
+        app:closeIcon="@drawable/ic_baseline_close_24"
+        android:hint="Find your favourite movie"
+        app:layout_constraintBottom_toTopOf="@id/rv_favourite_movies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favourite_movies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/corner_radius_or_margin"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/recycler_padding"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search_favourite"
+        tools:listitem="@layout/movie_favourite_info" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
