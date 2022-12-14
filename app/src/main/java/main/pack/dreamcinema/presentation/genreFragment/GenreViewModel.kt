@@ -13,6 +13,7 @@ import main.pack.dreamcinema.domain.MovieDetailInfo
 import main.pack.dreamcinema.domain.useCases.GetGenreUseCase
 import main.pack.dreamcinema.domain.useCases.GetMoviesByGenreUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -63,5 +64,10 @@ class GenreViewModel @Inject constructor(
                 _genre.value = movieGenre
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }

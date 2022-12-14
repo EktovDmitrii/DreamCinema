@@ -8,6 +8,7 @@ import main.pack.dreamcinema.domain.MovieDetailInfo
 import main.pack.dreamcinema.domain.useCases.DeleteMovieUseCase
 import main.pack.dreamcinema.domain.useCases.GetMovieListUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -51,4 +52,8 @@ class FavouriteViewModel @Inject constructor(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }
