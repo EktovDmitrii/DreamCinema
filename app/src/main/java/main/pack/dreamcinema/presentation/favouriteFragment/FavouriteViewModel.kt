@@ -4,13 +4,13 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import main.pack.dreamcinema.domain.MovieDetailInfo
-import main.pack.dreamcinema.domain.useCases.DeleteMovieUseCase
-import main.pack.dreamcinema.domain.useCases.GetMovieListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import main.pack.dreamcinema.domain.MovieDetailInfo
+import main.pack.dreamcinema.domain.useCases.DeleteMovieUseCase
+import main.pack.dreamcinema.domain.useCases.GetMovieListUseCase
 import javax.inject.Inject
 
 class FavouriteViewModel @Inject constructor(
@@ -21,6 +21,7 @@ class FavouriteViewModel @Inject constructor(
     private val _filteredLD = MutableLiveData<String>()
     val filteredLD: MutableLiveData<String>
         get() = _filteredLD
+
 
     private val movieLD = MutableLiveData<List<MovieDetailInfo>>()
 
@@ -40,7 +41,7 @@ class FavouriteViewModel @Inject constructor(
         }
     }
 
-    fun onFilterChange(): List<MovieDetailInfo>? {
+    private fun onFilterChange(): List<MovieDetailInfo>? {
         val filterText = _filteredLD.value ?: ""
         return movieLD.value?.filter { it.title.contains(filterText, true) }
     }

@@ -15,6 +15,7 @@ import main.pack.dreamcinema.presentation.MovieApp
 import main.pack.dreamcinema.presentation.ViewModelFactory
 import main.pack.dreamcinema.presentation.detailFragment.MovieDetailFragment
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class MoviesByGenreFragment : Fragment() {
 
     private lateinit var viewModel: GenreViewModel
 
-    private var adapter = MovieByGenreAdapter(
+    private var adapter: MovieByGenreAdapter? = MovieByGenreAdapter(
         object : MovieByGenreAdapter.OnMovieClickListener {
             override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
                 launchDetailFragment(movieDetailInfo.id)
@@ -61,7 +62,7 @@ class MoviesByGenreFragment : Fragment() {
         val genreID = getGenreId()
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.getMoviesByGenre(genreID).collectLatest {
-                adapter.submitData(lifecycle, it)
+                adapter?.submitData(lifecycle, it)
                 binding.backImageView.setOnClickListener {
                     pressBack()
                 }
@@ -71,9 +72,11 @@ class MoviesByGenreFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
+        adapter = null
+        lifecycleScope.cancel()
     }
 
     private fun setAdapter() {

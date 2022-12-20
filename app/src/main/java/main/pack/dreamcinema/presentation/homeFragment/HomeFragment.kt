@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-    private lateinit var adapterVertical: VerticalMovieInfoAdapter
+    private var adapterVertical: VerticalMovieInfoAdapter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,12 +63,13 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapterVertical = null
     }
 
     private fun setObservers() {
         subscribe(viewModel.listMovie) { it ->
-            adapterVertical.myData = it
-            adapterVertical.submitList(it)
+            adapterVertical?.myData = it
+            adapterVertical?.submitList(it)
         }
         subscribe(viewModel.isLoadingLifeData) {
             if (it) {
