@@ -33,7 +33,7 @@ class GenreFragment : Fragment() {
 
     private lateinit var viewModel: GenreViewModel
 
-    private lateinit var adapter: GenreAdapter
+    private var adapter: GenreAdapter? = null
 
     private lateinit var courseRv: RecyclerView
 
@@ -81,6 +81,7 @@ class GenreFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapter = null
     }
 
     private fun launchMovieFragment(genreId: Int) {
@@ -92,8 +93,8 @@ class GenreFragment : Fragment() {
 
     private fun setObservers() {
         subscribe(viewModel.genre) {
-            adapter.myData = it
-            adapter.submitList(it)
+            adapter?.myData = it
+            adapter?.submitList(it)
         }
     }
 

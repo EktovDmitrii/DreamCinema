@@ -1,6 +1,7 @@
 package main.pack.dreamcinema.presentation
 
 import android.app.Application
+import leakcanary.LeakCanary
 
 class MovieApp : Application() {
 

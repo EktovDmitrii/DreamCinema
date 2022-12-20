@@ -39,7 +39,7 @@ class FavouriteFragment : Fragment() {
 
     private lateinit var adapter: FavouriteAdapter
 
-    private lateinit var courseRv: RecyclerView
+    private var courseRv: RecyclerView? = null
 
     private lateinit var courseList: ArrayList<CourseRvModel>
 
@@ -87,6 +87,7 @@ class FavouriteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        courseRv = null
     }
 
 
@@ -103,14 +104,14 @@ class FavouriteFragment : Fragment() {
         courseRv = binding.rvFavouriteMovies
         courseList = ArrayList()
         val layoutManager = GridLayoutManager(context, 2)
-        courseRv.layoutManager = layoutManager
+        courseRv?.layoutManager = layoutManager
         adapter =
             FavouriteAdapter(courseList, context, object : FavouriteAdapter.OnMovieClickListener {
                 override fun onMovieClick(movieDetailInfo: MovieDetailInfo) {
                     launchDetailFragment(movieDetailInfo.id)
                 }
             })
-        courseRv.adapter = adapter
+        courseRv?.adapter = adapter
         setupSwipeListener(binding.rvFavouriteMovies)
     }
 
@@ -131,7 +132,6 @@ class FavouriteFragment : Fragment() {
                 val item = adapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteFromFavourite(item)
                 item.isInFavourite = false
-                Log.d("isInFavouriteStatus", "${item.isInFavourite}")
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)

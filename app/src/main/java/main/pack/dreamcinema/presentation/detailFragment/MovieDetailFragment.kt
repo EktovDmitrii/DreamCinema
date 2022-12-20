@@ -32,13 +32,13 @@ class MovieDetailFragment : Fragment() {
         (requireActivity().application as MovieApp).component
     }
 
-    lateinit var youTubeLoader: YouTubeLoader
+    private lateinit var youTubeLoader: YouTubeLoader
 
     private lateinit var viewModel: MovieDetailViewModel
 
-    private lateinit var castadapter: MovieCastAdapter
+    private var castadapter: MovieCastAdapter? = null
 
-    private lateinit var recommendationAdapter: MovieRecommendationAdapter
+    private var recommendationAdapter: MovieRecommendationAdapter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,6 +65,13 @@ class MovieDetailFragment : Fragment() {
         viewModel.getCastInfo(movieId)
         viewModel.getRecommendedMovies(movieId)
         setAdapter()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        recommendationAdapter = null
+        castadapter = null
     }
 
     private fun setAdapter() {
@@ -98,13 +105,13 @@ class MovieDetailFragment : Fragment() {
         }
 
         subscribe(viewModel.cast) {
-            castadapter.myData = it
-            castadapter.submitList(it)
+            castadapter?.myData = it
+            castadapter?.submitList(it)
         }
 
         subscribe(viewModel.recommendation) {
-            recommendationAdapter.myData = it
-            recommendationAdapter.submitList(it)
+            recommendationAdapter?.myData = it
+            recommendationAdapter?.submitList(it)
         }
     }
 
